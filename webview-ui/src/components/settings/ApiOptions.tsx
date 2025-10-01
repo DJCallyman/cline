@@ -347,9 +347,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 									data-testid={`provider-option-${item.value}`}
 									isSelected={index === selectedIndex}
 									key={item.value}
-									onClick={() => {
-										handleProviderChange(item.value)
-									}}
+									onClick={() => handleProviderChange(item.value)}
 									onMouseEnter={() => setSelectedIndex(index)}
 									ref={(el) => (itemRefs.current[index] = el)}>
 									<span dangerouslySetInnerHTML={{ __html: item.html }} />
