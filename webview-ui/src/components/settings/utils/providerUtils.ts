@@ -56,6 +56,9 @@ import {
 	sambanovaModels,
 	sapAiCoreDefaultModelId,
 	sapAiCoreModels,
+	VeniceModelId,
+	veniceDefaultModelId,
+	veniceModels,
 	vercelAiGatewayDefaultModelId,
 	vercelAiGatewayDefaultModelInfo,
 	vertexDefaultModelId,
@@ -63,8 +66,6 @@ import {
 	xaiDefaultModelId,
 	xaiModels,
 } from "@shared/api"
-import { type VeniceModelId, veniceModels } from "@shared/models/venice"
-import { veniceDefaultModelId } from "@shared/providers/venice"
 import { Mode } from "@shared/storage/types"
 
 /**

@@ -1,4 +1,4 @@
-import { veniceModels } from "@shared/models/venice"
+import { veniceModels } from "@shared/api"
 import { Mode } from "@shared/storage/types"
 import { type FC } from "react"
 import { useExtensionState } from "@/context/ExtensionStateContext"

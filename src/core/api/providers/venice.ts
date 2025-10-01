@@ -1,6 +1,5 @@
 import { Anthropic } from "@anthropic-ai/sdk"
-import { ModelInfo } from "@shared/api"
-import { veniceModels } from "@shared/models/venice"
+import { ModelInfo, veniceModels } from "@shared/api"
 import OpenAI from "openai"
 import { ApiHandler, CommonApiHandlerOptions } from "../index"
 import { withRetry } from "../retry"
