@@ -307,6 +307,8 @@ function convertApiProviderToProto(provider: string | undefined): ProtoApiProvid
 			return ProtoApiProvider.DIFY
 		case "oca":
 			return ProtoApiProvider.OCA
+		case "venice":
+			return ProtoApiProvider.VENICE
 		default:
 			return ProtoApiProvider.ANTHROPIC
 	}
@@ -387,6 +389,8 @@ export function convertProtoToApiProvider(provider: ProtoApiProvider): ApiProvid
 			return "dify"
 		case ProtoApiProvider.OCA:
 			return "oca"
+		case ProtoApiProvider.VENICE:
+			return "venice"
 		default:
 			return "anthropic"
 	}
@@ -468,6 +472,7 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		difyApiKey: config.difyApiKey,
 		difyBaseUrl: config.difyBaseUrl,
 		ocaBaseUrl: config.ocaBaseUrl,
+		veniceApiKey: config.veniceApiKey,
 
 		// Plan mode configurations
 		planModeApiProvider: config.planModeApiProvider ? convertApiProviderToProto(config.planModeApiProvider) : undefined,
@@ -503,6 +508,8 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		planModeVercelAiGatewayModelInfo: convertModelInfoToProtoOpenRouter(config.planModeVercelAiGatewayModelInfo),
 		planModeOcaModelId: config.planModeOcaModelId,
 		planModeOcaModelInfo: convertOcaModelInfoToProtoOcaModelInfo(config.planModeOcaModelInfo),
+		planModeVeniceModelId: config.planModeVeniceModelId,
+		planModeVeniceModelInfo: convertModelInfoToProtoOpenRouter(config.planModeVeniceModelInfo),
 
 		// Act mode configurations
 		actModeApiProvider: config.actModeApiProvider ? convertApiProviderToProto(config.actModeApiProvider) : undefined,
@@ -538,6 +545,8 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		actModeVercelAiGatewayModelInfo: convertModelInfoToProtoOpenRouter(config.actModeVercelAiGatewayModelInfo),
 		actModeOcaModelId: config.actModeOcaModelId,
 		actModeOcaModelInfo: convertOcaModelInfoToProtoOcaModelInfo(config.actModeOcaModelInfo),
+		actModeVeniceModelId: config.actModeVeniceModelId,
+		actModeVeniceModelInfo: convertModelInfoToProtoOpenRouter(config.actModeVeniceModelInfo),
 	}
 }
 
@@ -617,6 +626,7 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		difyApiKey: protoConfig.difyApiKey,
 		difyBaseUrl: protoConfig.difyBaseUrl,
 		ocaBaseUrl: protoConfig.ocaBaseUrl,
+		veniceApiKey: protoConfig.veniceApiKey,
 
 		// Plan mode configurations
 		planModeApiProvider:
@@ -655,6 +665,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		planModeVercelAiGatewayModelInfo: convertProtoToModelInfo(protoConfig.planModeVercelAiGatewayModelInfo),
 		planModeOcaModelId: protoConfig.planModeOcaModelId,
 		planModeOcaModelInfo: convertProtoOcaModelInfoToOcaModelInfo(protoConfig.planModeOcaModelInfo),
+		planModeVeniceModelId: protoConfig.planModeVeniceModelId,
+		planModeVeniceModelInfo: convertProtoToModelInfo(protoConfig.planModeVeniceModelInfo),
 
 		// Act mode configurations
 		actModeApiProvider:
@@ -691,5 +703,7 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		actModeVercelAiGatewayModelInfo: convertProtoToModelInfo(protoConfig.actModeVercelAiGatewayModelInfo),
 		actModeOcaModelId: protoConfig.actModeOcaModelId,
 		actModeOcaModelInfo: convertProtoOcaModelInfoToOcaModelInfo(protoConfig.actModeOcaModelInfo),
+		actModeVeniceModelId: protoConfig.actModeVeniceModelId,
+		actModeVeniceModelInfo: convertProtoToModelInfo(protoConfig.actModeVeniceModelInfo),
 	}
 }

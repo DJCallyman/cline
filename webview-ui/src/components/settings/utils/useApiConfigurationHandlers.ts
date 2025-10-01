@@ -2,6 +2,7 @@ import { ApiConfiguration } from "@shared/api"
 import { UpdateApiConfigurationRequest } from "@shared/proto/cline/models"
 import { convertApiConfigurationToProto } from "@shared/proto-conversions/models/api-configuration-conversion"
 import { Mode } from "@shared/storage/types"
+import { useCallback } from "react"
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { ModelsServiceClient } from "@/services/grpc-client"
 
@@ -18,19 +19,25 @@ export const useApiConfigurationHandlers = () => {
 	 * @param field - The field key to update
 	 * @param value - The new value for the field
 	 */
-	const handleFieldChange = async <K extends keyof ApiConfiguration>(field: K, value: ApiConfiguration[K]) => {
-		const updatedConfig = {
-			...apiConfiguration,
-			[field]: value,
-		}
+	const handleFieldChange = useCallback(
+		(field: string, value: any) => {
+			console.debug("[Venice] Field change:", {
+				field,
+				value,
+				isVeniceField: field.toLowerCase().includes("venice"),
+				updatedConfig: { ...apiConfiguration, [field]: value },
+			})
+			const updatedConfig = { ...apiConfiguration, [field]: value }
+			const protoConfig = convertApiConfigurationToProto(updatedConfig)
 
-		const protoConfig = convertApiConfigurationToProto(updatedConfig)
-		await ModelsServiceClient.updateApiConfigurationProto(
-			UpdateApiConfigurationRequest.create({
-				apiConfiguration: protoConfig,
-			}),
-		)
-	}
+			ModelsServiceClient.updateApiConfigurationProto(
+				UpdateApiConfigurationRequest.create({
+					apiConfiguration: protoConfig,
+				}),
+			)
+		},
+		[apiConfiguration],
+	)
 
 	/**
 	 * Updates multiple fields in the API configuration at once.
@@ -42,12 +49,27 @@ export const useApiConfigurationHandlers = () => {
 	 * @param updates - An object containing the fields to update and their new values
 	 */
 	const handleFieldsChange = async (updates: Partial<ApiConfiguration>) => {
+		console.debug("[Venice] handleFieldsChange called:", {
+			updates,
+			currentApiConfig: apiConfiguration,
+		})
+
 		const updatedConfig = {
 			...apiConfiguration,
 			...updates,
 		}
 
+		console.debug("[Venice] handleFieldsChange - merged config:", {
+			updatedConfig,
+			planModeApiProvider: updatedConfig.planModeApiProvider,
+			actModeApiProvider: updatedConfig.actModeApiProvider,
+		})
+
 		const protoConfig = convertApiConfigurationToProto(updatedConfig)
+		console.debug("[Venice] handleFieldsChange - proto config:", {
+			protoConfig: protoConfig ? "exists" : "null",
+		})
+
 		await ModelsServiceClient.updateApiConfigurationProto(
 			UpdateApiConfigurationRequest.create({
 				apiConfiguration: protoConfig,
@@ -60,10 +82,19 @@ export const useApiConfigurationHandlers = () => {
 		value: ApiConfiguration[PlanK] & ApiConfiguration[ActK], // Intersection ensures value is compatible with both field types
 		currentMode: Mode,
 	) => {
+		console.debug("[Venice] handleModeFieldChange called:", {
+			fieldPair,
+			value,
+			currentMode,
+			planActSeparateModelsSetting,
+		})
+
 		if (planActSeparateModelsSetting) {
 			const targetField = fieldPair[currentMode]
+			console.debug("[Venice] Using separate models - target field:", targetField)
 			await handleFieldChange(targetField, value)
 		} else {
+			console.debug("[Venice] Using shared models - updating both fields")
 			await handleFieldsChange({
 				[fieldPair.plan]: value,
 				[fieldPair.act]: value,

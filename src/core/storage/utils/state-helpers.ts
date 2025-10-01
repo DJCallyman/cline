@@ -1,4 +1,10 @@
-import { ANTHROPIC_MIN_THINKING_BUDGET, ApiProvider, fireworksDefaultModelId, type OcaModelInfo } from "@shared/api"
+import {
+	ANTHROPIC_MIN_THINKING_BUDGET,
+	ApiProvider,
+	fireworksDefaultModelId,
+	type ModelInfo,
+	type OcaModelInfo,
+} from "@shared/api"
 import { ExtensionContext } from "vscode"
 import { Controller } from "@/core/controller"
 import { DEFAULT_AUTO_APPROVAL_SETTINGS } from "@/shared/AutoApprovalSettings"
@@ -317,6 +323,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		>("planModeVercelAiGatewayModelInfo")
 		const planModeOcaModelId = context.globalState.get("planModeOcaModelId") as string | undefined
 		const planModeOcaModelInfo = context.globalState.get("planModeOcaModelInfo") as OcaModelInfo | undefined
+		const planModeVeniceModelId = context.globalState.get("planModeVeniceModelId") as string | undefined
+		const planModeVeniceModelInfo = context.globalState.get("planModeVeniceModelInfo") as ModelInfo | undefined
 		// Act mode configurations
 		const actModeApiProvider = context.globalState.get<GlobalStateAndSettings["actModeApiProvider"]>("actModeApiProvider")
 		const actModeApiModelId = context.globalState.get<GlobalStateAndSettings["actModeApiModelId"]>("actModeApiModelId")
@@ -383,6 +391,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		>("actModeVercelAiGatewayModelInfo")
 		const actModeOcaModelId = context.globalState.get("actModeOcaModelId") as string | undefined
 		const actModeOcaModelInfo = context.globalState.get("actModeOcaModelInfo") as OcaModelInfo | undefined
+		const actModeVeniceModelId = context.globalState.get("actModeVeniceModelId") as string | undefined
+		const actModeVeniceModelInfo = context.globalState.get("actModeVeniceModelInfo") as ModelInfo | undefined
 		const sapAiCoreUseOrchestrationMode =
 			context.globalState.get<GlobalStateAndSettings["sapAiCoreUseOrchestrationMode"]>("sapAiCoreUseOrchestrationMode")
 
@@ -495,6 +505,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			planModeVercelAiGatewayModelInfo,
 			planModeOcaModelId,
 			planModeOcaModelInfo,
+			planModeVeniceModelId,
+			planModeVeniceModelInfo,
 			// Act mode configurations
 			actModeApiProvider: actModeApiProvider || apiProvider,
 			actModeApiModelId,
@@ -529,6 +541,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			actModeVercelAiGatewayModelInfo,
 			actModeOcaModelId,
 			actModeOcaModelInfo,
+			actModeVeniceModelId,
+			actModeVeniceModelInfo,
 
 			// Other global fields
 			focusChainSettings: focusChainSettings || DEFAULT_FOCUS_CHAIN_SETTINGS,

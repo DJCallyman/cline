@@ -340,6 +340,14 @@ export class StateManager {
 			throw new Error(STATE_MANAGER_NOT_INITIALIZED)
 		}
 
+		console.debug("[Venice] StateManager setting API configuration:", {
+			planModeApiProvider: apiConfiguration.planModeApiProvider,
+			actModeApiProvider: apiConfiguration.actModeApiProvider,
+			hasVeniceApiKey: !!apiConfiguration.veniceApiKey,
+			planModeVeniceModelId: apiConfiguration.planModeVeniceModelId,
+			actModeVeniceModelId: apiConfiguration.actModeVeniceModelId,
+		})
+
 		const {
 			apiKey,
 			openRouterApiKey,
@@ -447,6 +455,8 @@ export class StateManager {
 			planModeVercelAiGatewayModelInfo,
 			planModeOcaModelId,
 			planModeOcaModelInfo,
+			planModeVeniceModelId,
+			planModeVeniceModelInfo,
 			// Act mode configurations
 			actModeApiProvider,
 			actModeApiModelId,
@@ -481,6 +491,8 @@ export class StateManager {
 			actModeVercelAiGatewayModelInfo,
 			actModeOcaModelId,
 			actModeOcaModelInfo,
+			actModeVeniceModelId,
+			actModeVeniceModelInfo,
 		} = apiConfiguration
 
 		// Batch update global state keys
@@ -519,6 +531,8 @@ export class StateManager {
 			planModeVercelAiGatewayModelInfo,
 			planModeOcaModelId,
 			planModeOcaModelInfo,
+			planModeVeniceModelId,
+			planModeVeniceModelInfo,
 
 			// Act mode configuration updates
 			actModeApiProvider,
@@ -554,6 +568,8 @@ export class StateManager {
 			actModeVercelAiGatewayModelInfo,
 			actModeOcaModelId,
 			actModeOcaModelInfo,
+			actModeVeniceModelId,
+			actModeVeniceModelInfo,
 
 			// Global state updates
 			awsRegion,
@@ -996,6 +1012,8 @@ export class StateManager {
 				this.globalStateCache["planModeVercelAiGatewayModelInfo"],
 			planModeOcaModelId: this.globalStateCache["planModeOcaModelId"],
 			planModeOcaModelInfo: this.globalStateCache["planModeOcaModelInfo"],
+			planModeVeniceModelId: this.globalStateCache["planModeVeniceModelId"],
+			planModeVeniceModelInfo: this.globalStateCache["planModeVeniceModelInfo"],
 
 			// Act mode configurations
 			actModeApiProvider: this.taskStateCache["actModeApiProvider"] || this.globalStateCache["actModeApiProvider"],
@@ -1058,6 +1076,8 @@ export class StateManager {
 				this.globalStateCache["actModeVercelAiGatewayModelInfo"],
 			actModeOcaModelId: this.globalStateCache["actModeOcaModelId"],
 			actModeOcaModelInfo: this.globalStateCache["actModeOcaModelInfo"],
+			actModeVeniceModelId: this.globalStateCache["actModeVeniceModelId"],
+			actModeVeniceModelInfo: this.globalStateCache["actModeVeniceModelInfo"],
 		}
 	}
 }

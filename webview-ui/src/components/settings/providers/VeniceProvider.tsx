@@ -43,7 +43,7 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 						models={veniceModels}
 						onChange={(e: any) =>
 							handleModeFieldChange(
-								{ plan: "planModeApiModelId", act: "actModeApiModelId" },
+								{ plan: "planModeVeniceModelId", act: "actModeVeniceModelId" },
 								e.target.value,
 								currentMode,
 							)

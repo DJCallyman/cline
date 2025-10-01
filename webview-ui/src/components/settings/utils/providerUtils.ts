@@ -63,6 +63,8 @@ import {
 	xaiDefaultModelId,
 	xaiModels,
 } from "@shared/api"
+import { type VeniceModelId, veniceModels } from "@shared/models/venice"
+import { veniceDefaultModelId } from "@shared/providers/venice"
 import { Mode } from "@shared/storage/types"
 
 /**
@@ -362,10 +364,20 @@ export function normalizeApiConfiguration(
 				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelId : apiConfiguration?.actModeVeniceModelId
 			const veniceModelInfo =
 				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelInfo : apiConfiguration?.actModeVeniceModelInfo
+			console.debug("[Venice] Normalizing provider configuration:", {
+				provider,
+				mode: currentMode,
+				hasConfig: !!apiConfiguration,
+				veniceModelId,
+				hasVeniceModelInfo: !!veniceModelInfo,
+				hasApiKey: !!apiConfiguration?.veniceApiKey,
+				fallbackModelId: veniceDefaultModelId,
+				fallbackModelInfo: veniceModels[veniceDefaultModelId as VeniceModelId],
+			})
 			return {
 				selectedProvider: provider,
-				selectedModelId: veniceModelId || "",
-				selectedModelInfo: veniceModelInfo || liteLlmModelInfoSaneDefaults,
+				selectedModelId: veniceModelId || veniceDefaultModelId,
+				selectedModelInfo: veniceModelInfo || veniceModels[veniceDefaultModelId as VeniceModelId],
 			}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
