@@ -175,8 +175,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 	}, [])
 
 	const currentProviderLabel = useMemo(() => {
-		const label = providerOptions.find((option) => option.value === selectedProvider)?.label || selectedProvider
-		return label
+		return providerOptions.find((option) => option.value === selectedProvider)?.label || selectedProvider
 	}, [providerOptions, selectedProvider])
 
 	// Sync search term with current provider when not searching
