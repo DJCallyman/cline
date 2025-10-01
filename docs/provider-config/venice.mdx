@@ -1,0 +1,76 @@
+---
+title: "Venice"
+description: "Learn how to configure and use Venice AI models with Cline. Venice provides privacy-first AI with no data retention and OpenAI-compatible API."
+---
+
+Venice AI is a privacy-first AI platform that provides access to powerful language models with no data retention, permissionless access, and OpenAI-compatible API endpoints.
+
+**Website:** [https://venice.ai/](https://venice.ai/)
+
+### Getting an API Key
+
+1. **Sign Up/Sign In:** Go to the [Venice AI website](https://venice.ai/) and create an account or sign in.
+2. **Navigate to API Settings:** Go to the [API Settings page](https://venice.ai/settings/api) or click "API" in the left toolbar.
+3. **Generate New API Key:** Scroll down and click "Generate New API Key".
+4. **Configure Key Settings:**
+   - Give your key a descriptive name (e.g., "Cline")
+   - Choose "Inference Only" for regular usage
+   - Optional expiration date and usage limits
+5. **Copy the Key:** Click "Generate" and **immediately copy the API key**. This key is only shown once and cannot be retrieved later.
+
+### Supported Models
+
+Cline supports the following Venice models:
+
+- `venice-uncensored` (Venice Uncensored 1.1) - No content filtering, 32K context
+- `qwen3-4b` (Venice Small) - Fast and affordable for most tasks, 41K context
+- `mistral-31-24b` (Venice Medium 3.1) - Vision capabilities and function calling, 131K context
+- `qwen3-235b` (Venice Large 1.1) - Most powerful flagship model with advanced reasoning, 131K context
+- `llama-3.3-70b` (Llama 3.3 70B) - Balanced high-performance model, 65K context
+- `llama-3.2-3b` (Llama 3.2 3B) - Fastest for simple tasks, 131K context
+
+### Configuration in Cline
+
+1. **Open Cline Settings:** Click the settings icon (⚙️) in the Cline panel.
+2. **Select Provider:** Choose "Venice" from the "API Provider" dropdown.
+3. **Enter API Key:** Paste your Venice API key into the "Venice API Key" field.
+4. **Select Model:** Choose your desired model from the "Model" dropdown.
+
+### Privacy-First Architecture
+
+Venice's core philosophy centers on user privacy and data protection:
+
+#### No Data Retention
+Venice does not store, log, or retain any of your conversations or API requests. Your data is processed in real-time and immediately discarded.
+
+#### Permissionless Access
+No approval processes, waiting periods, or content review. Start using Venice immediately after account creation.
+
+#### OpenAI Compatibility
+Venice provides full OpenAI API compatibility, making it easy to integrate with existing workflows and tools that use OpenAI's format.
+
+### Special Features
+
+#### Vision Processing
+The `mistral-31-24b` model supports image understanding and processing capabilities.
+
+#### Reasoning Mode
+Models like `qwen3-235b` and `qwen3-4b` offer enhanced reasoning capabilities for complex problem-solving tasks.
+
+#### Uncensored Options
+The `venice-uncensored` model provides unrestricted content generation without filtering.
+
+#### Function Calling
+Select models support function calling for tool integration and structured outputs.
+
+### Tips and Notes
+
+- **Model Selection:** Choose models based on your specific needs:
+  - Use `qwen3-4b` for cost-effective general tasks
+  - Use `mistral-31-24b` when you need vision capabilities
+  - Use `qwen3-235b` for complex reasoning tasks
+  - Use `venice-uncensored` for unrestricted content generation
+- **Privacy Advantage:** Venice's no-data-retention policy makes it ideal for sensitive or proprietary work
+- **Pricing:** Venice uses transparent pay-per-use pricing per 1M tokens. Check the [Venice Models page](https://docs.venice.ai/overview/models) for current rates
+- **API Compatibility:** Venice is fully compatible with OpenAI SDKs and existing code
+- **Beta Models:** Access to experimental models available for beta users
