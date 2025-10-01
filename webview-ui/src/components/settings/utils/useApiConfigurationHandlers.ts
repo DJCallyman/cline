@@ -2,7 +2,6 @@ import { ApiConfiguration } from "@shared/api"
 import { UpdateApiConfigurationRequest } from "@shared/proto/cline/models"
 import { convertApiConfigurationToProto } from "@shared/proto-conversions/models/api-configuration-conversion"
 import { Mode } from "@shared/storage/types"
-import { useCallback } from "react"
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { ModelsServiceClient } from "@/services/grpc-client"
 
@@ -19,19 +18,19 @@ export const useApiConfigurationHandlers = () => {
 	 * @param field - The field key to update
 	 * @param value - The new value for the field
 	 */
-	const handleFieldChange = useCallback(
-		(field: string, value: any) => {
-			const updatedConfig = { ...apiConfiguration, [field]: value }
-			const protoConfig = convertApiConfigurationToProto(updatedConfig)
+	const handleFieldChange = async <K extends keyof ApiConfiguration>(field: K, value: ApiConfiguration[K]) => {
+		const updatedConfig = {
+			...apiConfiguration,
+			[field]: value,
+		}
 
-			ModelsServiceClient.updateApiConfigurationProto(
-				UpdateApiConfigurationRequest.create({
-					apiConfiguration: protoConfig,
-				}),
-			)
-		},
-		[apiConfiguration],
-	)
+		const protoConfig = convertApiConfigurationToProto(updatedConfig)
+		await ModelsServiceClient.updateApiConfigurationProto(
+			UpdateApiConfigurationRequest.create({
+				apiConfiguration: protoConfig,
+			}),
+		)
+	}
 
 	/**
 	 * Updates multiple fields in the API configuration at once.
@@ -49,7 +48,6 @@ export const useApiConfigurationHandlers = () => {
 		}
 
 		const protoConfig = convertApiConfigurationToProto(updatedConfig)
-
 		await ModelsServiceClient.updateApiConfigurationProto(
 			UpdateApiConfigurationRequest.create({
 				apiConfiguration: protoConfig,
