@@ -400,6 +400,7 @@ export class StateManager {
 			sapAiCoreBaseUrl,
 			sapAiCoreTokenUrl,
 			sapAiResourceGroup,
+			veniceApiKey,
 			sapAiCoreUseOrchestrationMode,
 			claudeCodePath,
 			qwenCodeOauthPath,
@@ -630,6 +631,7 @@ export class StateManager {
 			difyApiKey,
 			vercelAiGatewayApiKey,
 			zaiApiKey,
+			veniceApiKey,
 		})
 	}
 
@@ -882,6 +884,7 @@ export class StateManager {
 			difyApiKey: this.secretsCache["difyApiKey"],
 			vercelAiGatewayApiKey: this.secretsCache["vercelAiGatewayApiKey"],
 			zaiApiKey: this.secretsCache["zaiApiKey"],
+			veniceApiKey: this.secretsCache["veniceApiKey"],
 
 			// Global state
 			awsRegion: this.taskStateCache["awsRegion"] || this.globalStateCache["awsRegion"],

@@ -42,6 +42,7 @@ import { RequestyProvider } from "./providers/RequestyProvider"
 import { SambanovaProvider } from "./providers/SambanovaProvider"
 import { SapAiCoreProvider } from "./providers/SapAiCoreProvider"
 import { TogetherProvider } from "./providers/TogetherProvider"
+import { VeniceProvider } from "./providers/VeniceProvider"
 import { VercelAIGatewayProvider } from "./providers/VercelAIGatewayProvider"
 import { VertexProvider } from "./providers/VertexProvider"
 import { VSCodeLmProvider } from "./providers/VSCodeLmProvider"
@@ -128,6 +129,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 		const providers = [
 			{ value: "cline", label: "Cline" },
 			{ value: "openrouter", label: "OpenRouter" },
+			{ value: "venice", label: "Venice" },
 			{ value: "gemini", label: "Google Gemini" },
 			{ value: "openai", label: "OpenAI Compatible" },
 			{ value: "anthropic", label: "Anthropic" },
@@ -357,6 +359,10 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 			{apiConfiguration && selectedProvider === "cline" && (
 				<ClineProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
+			)}
+
+			{apiConfiguration && selectedProvider === "venice" && (
+				<VeniceProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
 			)}
 
 			{apiConfiguration && selectedProvider === "asksage" && (

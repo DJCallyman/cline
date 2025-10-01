@@ -357,6 +357,16 @@ export function normalizeApiConfiguration(
 				selectedModelId: ocaModelId || "",
 				selectedModelInfo: ocaModelInfo || liteLlmModelInfoSaneDefaults,
 			}
+		case "venice":
+			const veniceModelId =
+				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelId : apiConfiguration?.actModeVeniceModelId
+			const veniceModelInfo =
+				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelInfo : apiConfiguration?.actModeVeniceModelInfo
+			return {
+				selectedProvider: provider,
+				selectedModelId: veniceModelId || "",
+				selectedModelInfo: veniceModelInfo || liteLlmModelInfoSaneDefaults,
+			}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
 	}

@@ -34,6 +34,7 @@ export type ApiProvider =
 	| "huawei-cloud-maas"
 	| "dify"
 	| "baseten"
+	| "venice"
 	| "vercel-ai-gateway"
 	| "zai"
 	| "oca"
@@ -48,6 +49,7 @@ export interface ApiHandlerSecrets {
 	clineAccountId?: string
 	awsSessionToken?: string
 	awsBedrockApiKey?: string
+	veniceApiKey?: string
 	openAiApiKey?: string
 	geminiApiKey?: string
 	openAiNativeApiKey?: string
@@ -153,6 +155,8 @@ export interface ApiHandlerOptions {
 	planModeVercelAiGatewayModelInfo?: ModelInfo
 	planModeOcaModelId?: string
 	planModeOcaModelInfo?: OcaModelInfo
+	planModeVeniceModelId?: string
+	planModeVeniceModelInfo?: ModelInfo
 	// Act mode configurations
 
 	// Act mode configurations
@@ -188,6 +192,8 @@ export interface ApiHandlerOptions {
 	actModeVercelAiGatewayModelInfo?: ModelInfo
 	actModeOcaModelId?: string
 	actModeOcaModelInfo?: OcaModelInfo
+	actModeVeniceModelId?: string
+	actModeVeniceModelInfo?: ModelInfo
 }
 
 export type ApiConfiguration = ApiHandlerOptions &
