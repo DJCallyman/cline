@@ -9,7 +9,8 @@ import { ApiStream } from "../transform/stream"
 
 interface VeniceHandlerOptions extends CommonApiHandlerOptions {
 	veniceApiKey?: string
-	apiModelId?: string
+	veniceModelId?: string
+	veniceModelInfo?: ModelInfo
 }
 
 export class VeniceHandler implements ApiHandler {
@@ -76,9 +77,13 @@ export class VeniceHandler implements ApiHandler {
 	}
 
 	getModel(): { id: string; info: ModelInfo } {
-		const modelId = this.options.apiModelId
+		const modelId = this.options.veniceModelId
 		if (modelId && modelId in veniceModels) {
 			return { id: modelId, info: veniceModels[modelId as keyof typeof veniceModels] }
+		}
+		// Use model info if available
+		if (this.options.veniceModelInfo && this.options.veniceModelId) {
+			return { id: this.options.veniceModelId, info: this.options.veniceModelInfo }
 		}
 		const defaultModel = "venice-uncensored" as const
 		return {

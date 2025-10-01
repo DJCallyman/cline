@@ -364,16 +364,6 @@ export function normalizeApiConfiguration(
 				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelId : apiConfiguration?.actModeVeniceModelId
 			const veniceModelInfo =
 				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelInfo : apiConfiguration?.actModeVeniceModelInfo
-			console.debug("[Venice] Normalizing provider configuration:", {
-				provider,
-				mode: currentMode,
-				hasConfig: !!apiConfiguration,
-				veniceModelId,
-				hasVeniceModelInfo: !!veniceModelInfo,
-				hasApiKey: !!apiConfiguration?.veniceApiKey,
-				fallbackModelId: veniceDefaultModelId,
-				fallbackModelInfo: veniceModels[veniceDefaultModelId as VeniceModelId],
-			})
 			return {
 				selectedProvider: provider,
 				selectedModelId: veniceModelId || veniceDefaultModelId,

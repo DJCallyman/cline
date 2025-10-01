@@ -32,6 +32,7 @@ import { RequestyHandler } from "./providers/requesty"
 import { SambanovaHandler } from "./providers/sambanova"
 import { SapAiCoreHandler } from "./providers/sapaicore"
 import { TogetherHandler } from "./providers/together"
+import { VeniceHandler } from "./providers/venice"
 import { VercelAIGatewayHandler } from "./providers/vercel-ai-gateway"
 import { VertexHandler } from "./providers/vertex"
 import { VsCodeLmHandler } from "./providers/vscode-lm"
@@ -386,6 +387,13 @@ function createHandlerForProvider(
 						? options.planModeOcaModelInfo?.supportsPromptCache
 						: options.actModeOcaModelInfo?.supportsPromptCache,
 				taskId: options.ulid,
+			})
+		case "venice":
+			return new VeniceHandler({
+				onRetryAttempt: options.onRetryAttempt,
+				veniceApiKey: options.veniceApiKey,
+				veniceModelId: mode === "plan" ? options.planModeVeniceModelId : options.actModeVeniceModelId,
+				veniceModelInfo: mode === "plan" ? options.planModeVeniceModelInfo : options.actModeVeniceModelInfo,
 			})
 		default:
 			return new AnthropicHandler({

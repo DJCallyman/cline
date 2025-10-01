@@ -340,14 +340,6 @@ export class StateManager {
 			throw new Error(STATE_MANAGER_NOT_INITIALIZED)
 		}
 
-		console.debug("[Venice] StateManager setting API configuration:", {
-			planModeApiProvider: apiConfiguration.planModeApiProvider,
-			actModeApiProvider: apiConfiguration.actModeApiProvider,
-			hasVeniceApiKey: !!apiConfiguration.veniceApiKey,
-			planModeVeniceModelId: apiConfiguration.planModeVeniceModelId,
-			actModeVeniceModelId: apiConfiguration.actModeVeniceModelId,
-		})
-
 		const {
 			apiKey,
 			openRouterApiKey,

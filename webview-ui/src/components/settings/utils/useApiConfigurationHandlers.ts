@@ -21,12 +21,6 @@ export const useApiConfigurationHandlers = () => {
 	 */
 	const handleFieldChange = useCallback(
 		(field: string, value: any) => {
-			console.debug("[Venice] Field change:", {
-				field,
-				value,
-				isVeniceField: field.toLowerCase().includes("venice"),
-				updatedConfig: { ...apiConfiguration, [field]: value },
-			})
 			const updatedConfig = { ...apiConfiguration, [field]: value }
 			const protoConfig = convertApiConfigurationToProto(updatedConfig)
 
@@ -49,26 +43,12 @@ export const useApiConfigurationHandlers = () => {
 	 * @param updates - An object containing the fields to update and their new values
 	 */
 	const handleFieldsChange = async (updates: Partial<ApiConfiguration>) => {
-		console.debug("[Venice] handleFieldsChange called:", {
-			updates,
-			currentApiConfig: apiConfiguration,
-		})
-
 		const updatedConfig = {
 			...apiConfiguration,
 			...updates,
 		}
 
-		console.debug("[Venice] handleFieldsChange - merged config:", {
-			updatedConfig,
-			planModeApiProvider: updatedConfig.planModeApiProvider,
-			actModeApiProvider: updatedConfig.actModeApiProvider,
-		})
-
 		const protoConfig = convertApiConfigurationToProto(updatedConfig)
-		console.debug("[Venice] handleFieldsChange - proto config:", {
-			protoConfig: protoConfig ? "exists" : "null",
-		})
 
 		await ModelsServiceClient.updateApiConfigurationProto(
 			UpdateApiConfigurationRequest.create({
@@ -82,19 +62,10 @@ export const useApiConfigurationHandlers = () => {
 		value: ApiConfiguration[PlanK] & ApiConfiguration[ActK], // Intersection ensures value is compatible with both field types
 		currentMode: Mode,
 	) => {
-		console.debug("[Venice] handleModeFieldChange called:", {
-			fieldPair,
-			value,
-			currentMode,
-			planActSeparateModelsSetting,
-		})
-
 		if (planActSeparateModelsSetting) {
 			const targetField = fieldPair[currentMode]
-			console.debug("[Venice] Using separate models - target field:", targetField)
 			await handleFieldChange(targetField, value)
 		} else {
-			console.debug("[Venice] Using shared models - updating both fields")
 			await handleFieldsChange({
 				[fieldPair.plan]: value,
 				[fieldPair.act]: value,

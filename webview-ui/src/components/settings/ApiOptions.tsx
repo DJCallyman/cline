@@ -176,11 +176,6 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 	const currentProviderLabel = useMemo(() => {
 		const label = providerOptions.find((option) => option.value === selectedProvider)?.label || selectedProvider
-		console.debug("[Venice] Current provider label:", {
-			selectedProvider,
-			label,
-			providerOptions: providerOptions.length,
-		})
 		return label
 	}, [providerOptions, selectedProvider])
 
@@ -217,12 +212,6 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 	}, [searchableItems, searchTerm, fuse, currentProviderLabel])
 
 	const handleProviderChange = (newProvider: string) => {
-		console.debug("[Venice] Provider selection changed:", {
-			previousProvider: selectedProvider,
-			newProvider,
-			currentMode,
-			hasApiConfig: !!apiConfiguration,
-		})
 		handleModeFieldChange({ plan: "planModeApiProvider", act: "actModeApiProvider" }, newProvider as any, currentMode)
 		setIsDropdownVisible(false)
 		setSelectedIndex(-1)
@@ -359,11 +348,6 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 									isSelected={index === selectedIndex}
 									key={item.value}
 									onClick={() => {
-										console.debug("[Venice] Provider dropdown item clicked:", {
-											value: item.value,
-											label: item.html,
-											index,
-										})
 										handleProviderChange(item.value)
 									}}
 									onMouseEnter={() => setSelectedIndex(index)}
