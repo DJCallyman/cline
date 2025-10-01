@@ -307,6 +307,8 @@ function convertApiProviderToProto(provider: string | undefined): ProtoApiProvid
 			return ProtoApiProvider.DIFY
 		case "oca":
 			return ProtoApiProvider.OCA
+		case "venice":
+			return ProtoApiProvider.VENICE
 		default:
 			return ProtoApiProvider.ANTHROPIC
 	}
@@ -387,6 +389,8 @@ export function convertProtoToApiProvider(provider: ProtoApiProvider): ApiProvid
 			return "dify"
 		case ProtoApiProvider.OCA:
 			return "oca"
+		case ProtoApiProvider.VENICE:
+			return "venice"
 		default:
 			return "anthropic"
 	}
@@ -406,6 +410,8 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		anthropicBaseUrl: config.anthropicBaseUrl,
 		openRouterApiKey: config.openRouterApiKey,
 		openRouterProviderSorting: config.openRouterProviderSorting,
+		veniceApiKey: config.veniceApiKey,
+		veniceBaseUrl: config.veniceBaseUrl,
 		awsAccessKey: config.awsAccessKey,
 		awsSecretKey: config.awsSecretKey,
 		awsSessionToken: config.awsSessionToken,
@@ -617,6 +623,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		difyApiKey: protoConfig.difyApiKey,
 		difyBaseUrl: protoConfig.difyBaseUrl,
 		ocaBaseUrl: protoConfig.ocaBaseUrl,
+		veniceApiKey: protoConfig.veniceApiKey,
+		veniceBaseUrl: protoConfig.veniceBaseUrl,
 
 		// Plan mode configurations
 		planModeApiProvider:

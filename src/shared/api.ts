@@ -37,6 +37,7 @@ export type ApiProvider =
 	| "vercel-ai-gateway"
 	| "zai"
 	| "oca"
+	| "venice"
 
 export interface ApiHandlerSecrets {
 	apiKey?: string // anthropic
@@ -75,6 +76,7 @@ export interface ApiHandlerSecrets {
 	basetenApiKey?: string
 	vercelAiGatewayApiKey?: string
 	difyApiKey?: string
+	veniceApiKey?: string
 }
 
 export interface ApiHandlerOptions {
@@ -117,6 +119,9 @@ export interface ApiHandlerOptions {
 	sapAiCoreUseOrchestrationMode?: boolean
 	difyBaseUrl?: string
 	zaiApiLine?: string
+	veniceBaseUrl?: string
+	stripThinkingResponse?: boolean
+	disableThinking?: boolean
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	ocaBaseUrl?: string
 
@@ -194,6 +199,10 @@ export type ApiConfiguration = ApiHandlerOptions &
 	ApiHandlerSecrets & {
 		planModeApiProvider?: ApiProvider
 		actModeApiProvider?: ApiProvider
+		planModeVeniceModelId?: string
+		actModeVeniceModelId?: string
+		planModeVeniceModelInfo?: ModelInfo
+		actModeVeniceModelInfo?: ModelInfo
 	}
 
 // Models
@@ -3415,6 +3424,22 @@ export const basetenModels = {
 } as const satisfies Record<string, ModelInfo>
 export type BasetenModelId = keyof typeof basetenModels
 export const basetenDefaultModelId = "moonshotai/Kimi-K2-Instruct" satisfies BasetenModelId
+
+// Venice AI
+// https://venice.ai/
+export type VeniceModelId = keyof typeof veniceModels
+export const veniceDefaultModelId: VeniceModelId = "venice-uncensored"
+export const veniceModels = {
+	"venice-uncensored": {
+		maxTokens: 8192,
+		contextWindow: 128_000,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0.7,
+		outputPrice: 2.8,
+		description: "Venice Uncensored model - uncensored and unrestricted AI responses",
+	},
+} as const satisfies Record<string, ModelInfo>
 
 // Z AI
 // https://docs.z.ai/guides/llm/glm-4.5

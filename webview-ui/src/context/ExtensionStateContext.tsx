@@ -310,16 +310,12 @@ export const ExtensionStateContextProvider: React.FC<{
 							setShowWelcome(!newState.welcomeViewCompleted)
 							setDidHydrateState(true)
 
-							console.log("[DEBUG] returning new state in ESC")
-
 							return newState
 						})
 					} catch (error) {
 						console.error("Error parsing state JSON:", error)
-						console.log("[DEBUG] ERR getting state", error)
 					}
 				}
-				console.log('[DEBUG] ended "got subscribed state"')
 			},
 			onError: (error) => {
 				console.error("Error in state subscription:", error)

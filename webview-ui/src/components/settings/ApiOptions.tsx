@@ -1,3 +1,4 @@
+import { ApiProvider } from "@shared/api"
 import { StringRequest } from "@shared/proto/cline/common"
 import { Mode } from "@shared/storage/types"
 import { VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
@@ -41,6 +42,7 @@ import { RequestyProvider } from "./providers/RequestyProvider"
 import { SambanovaProvider } from "./providers/SambanovaProvider"
 import { SapAiCoreProvider } from "./providers/SapAiCoreProvider"
 import { TogetherProvider } from "./providers/TogetherProvider"
+import { VeniceProvider } from "./providers/VeniceProvider"
 import { VercelAIGatewayProvider } from "./providers/VercelAIGatewayProvider"
 import { VertexProvider } from "./providers/VertexProvider"
 import { VSCodeLmProvider } from "./providers/VSCodeLmProvider"
@@ -86,7 +88,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 	const { selectedProvider } = normalizeApiConfiguration(apiConfiguration, currentMode)
 
-	const { handleModeFieldChange } = useApiConfigurationHandlers()
+	const { handleFieldsChange } = useApiConfigurationHandlers()
 
 	const [_ollamaModels, setOllamaModels] = useState<string[]>([])
 
@@ -160,6 +162,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 			{ value: "sambanova", label: "SambaNova" },
 			{ value: "huawei-cloud-maas", label: "Huawei Cloud MaaS" },
 			{ value: "dify", label: "Dify.ai" },
+			{ value: "venice", label: "Venice" },
 			{ value: "oca", label: "Oracle Code Assist" },
 		],
 		[],
@@ -202,9 +205,15 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 	}, [searchableItems, searchTerm, fuse, currentProviderLabel])
 
 	const handleProviderChange = (newProvider: string) => {
-		handleModeFieldChange({ plan: "planModeApiProvider", act: "actModeApiProvider" }, newProvider as any, currentMode)
+		// Update both plan and act mode providers directly
+		handleFieldsChange({
+			planModeApiProvider: newProvider as ApiProvider,
+			actModeApiProvider: newProvider as ApiProvider,
+		})
 		setIsDropdownVisible(false)
 		setSelectedIndex(-1)
+		// Force a re-render to ensure the provider is updated
+		setSearchTerm(providerOptions.find((option) => option.value === newProvider)?.label || newProvider)
 	}
 
 	const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -332,17 +341,22 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 					</VSCodeTextField>
 					{isDropdownVisible && (
 						<ProviderDropdownList ref={dropdownListRef}>
-							{providerSearchResults.map((item, index) => (
-								<ProviderDropdownItem
-									data-testid={`provider-option-${item.value}`}
-									isSelected={index === selectedIndex}
-									key={item.value}
-									onClick={() => handleProviderChange(item.value)}
-									onMouseEnter={() => setSelectedIndex(index)}
-									ref={(el) => (itemRefs.current[index] = el)}>
-									<span dangerouslySetInnerHTML={{ __html: item.html }} />
-								</ProviderDropdownItem>
-							))}
+							{providerSearchResults.map((item, index) => {
+								const { value, html } = item
+								return (
+									<ProviderDropdownItem
+										data-testid={`provider-option-${value}`}
+										isSelected={index === selectedIndex}
+										key={value}
+										onClick={() => handleProviderChange(value)}
+										onMouseEnter={() => setSelectedIndex(index)}
+										ref={(el) => {
+											itemRefs.current[index] = el
+										}}>
+										<span>{html}</span>
+									</ProviderDropdownItem>
+								)
+							})}
 						</ProviderDropdownList>
 					)}
 				</ProviderDropdownWrapper>
@@ -482,6 +496,10 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 			{apiConfiguration && selectedProvider === "zai" && (
 				<ZAiProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
+			)}
+
+			{apiConfiguration && selectedProvider === "venice" && (
+				<VeniceProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
 			)}
 
 			{apiConfiguration && selectedProvider === "oca" && <OcaProvider currentMode={currentMode} isPopup={isPopup} />}

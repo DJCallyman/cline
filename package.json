@@ -332,7 +332,23 @@
 		},
 		"configuration": {
 			"title": "Cline",
-			"properties": {}
+			"properties": {
+				"cline.veniceBaseUrl": {
+					"type": "string",
+					"default": "https://api.venice.ai/api/v1",
+					"description": "Base URL for Venice API endpoint"
+				},
+				"cline.stripThinkingResponse": {
+					"type": "boolean",
+					"default": false,
+					"description": "Strip thinking response from Venice AI output"
+				},
+				"cline.disableThinking": {
+					"type": "boolean",
+					"default": false,
+					"description": "Disable thinking process in Venice AI responses"
+				}
+			}
 		}
 	},
 	"scripts": {

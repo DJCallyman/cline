@@ -1,0 +1,76 @@
+# Venice AI Provider Configuration
+
+The Venice AI provider allows Cline to connect to the Venice AI service, which offers uncensored model responses with advanced reasoning capabilities.
+
+## Configuration
+
+To configure the Venice AI provider, you'll need to set the following settings in your VSCode settings:
+
+| Setting | Description | Default Value |
+|---------|-------------|---------------|
+| `cline.veniceApiKey` | Your Venice AI API key | *(required)* |
+| `cline.veniceBaseUrl` | Base URL for Venice API endpoint | `https://api.venice.ai/api/v1` |
+| `cline.stripThinkingResponse` | Remove thinking process from responses | `false` |
+| `cline.disableThinking` | Completely disable thinking process in responses | `false` |
+
+### Required Configuration
+
+1. Obtain your Venice AI API key from [Venice AI Console](https://console.venice.ai)
+2. Open VSCode settings (Ctrl+, or Cmd+, on Mac)
+3. Search for "Venice" in the settings search bar
+4. Enter your API key in the `Cline > Venice: Api Key` field
+
+## Provider Features
+
+### Venice-Specific Parameters
+
+The Venice provider supports these special parameters that can be configured:
+
+- **Strip Thinking Response**: When enabled, removes the "thinking" portion of the response, showing only the final answer
+- **Disable Thinking**: Completely disables the reasoning process, making responses faster but potentially less accurate
+
+### Model Selection
+
+The Venice provider currently uses the `venice-uncensored` model by default. This model offers:
+- 128K context window
+- Uncensored responses
+- Advanced reasoning capabilities
+- Support for complex instruction following
+
+## Troubleshooting
+
+### Common Issues
+
+**API Key Errors**
+- Verify your API key is correctly entered in settings
+- Check that your Venice AI account is active and in good standing
+- Ensure you're using the correct API endpoint URL
+
+**Connection Issues**
+- Check your internet connection
+- Verify the Venice API service status at [Venice Status Page](https://status.venice.ai)
+- Try changing the `cline.veniceBaseUrl` if you're using a custom deployment
+
+## Example Configuration
+
+```json
+{
+  "cline.veniceApiKey": "your_venice_api_key_here",
+  "cline.stripThinkingResponse": true,
+  "cline.disableThinking": false
+}
+```
+
+## Advanced Configuration
+
+For advanced users, you can configure Venice to work with custom deployments by modifying the base URL:
+
+```json
+{
+  "cline.veniceBaseUrl": "https://your-custom-venice-deployment.com/api/v1"
+}
+```
+
+## API Compatibility
+
+The Venice provider implements the OpenAI-compatible API interface, making it compatible with Cline's standard API handling system while providing access to Venice-specific features through the configuration options.
