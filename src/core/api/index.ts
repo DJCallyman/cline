@@ -394,11 +394,26 @@ function createHandlerForProvider(
 				veniceApiKey: options.veniceApiKey,
 				veniceModelId: mode === "plan" ? options.planModeVeniceModelId : options.actModeVeniceModelId,
 				veniceModelInfo: mode === "plan" ? options.planModeVeniceModelInfo : options.actModeVeniceModelInfo,
-				veniceEnableWebSearch: options.veniceEnableWebSearch,
-				veniceIncludeSearchResultsInStream: options.veniceIncludeSearchResultsInStream,
-				veniceIncludeVeniceSystemPrompt: options.veniceIncludeVeniceSystemPrompt,
-				veniceStripThinkingResponse: options.veniceStripThinkingResponse,
-				veniceDisableThinking: options.veniceDisableThinking,
+				veniceEnableWebSearch:
+					mode === "plan"
+						? (options.planModeVeniceEnableWebSearch ?? options.veniceEnableWebSearch)
+						: (options.actModeVeniceEnableWebSearch ?? options.veniceEnableWebSearch),
+				veniceIncludeSearchResultsInStream:
+					mode === "plan"
+						? (options.planModeVeniceIncludeSearchResultsInStream ?? options.veniceIncludeSearchResultsInStream)
+						: (options.actModeVeniceIncludeSearchResultsInStream ?? options.veniceIncludeSearchResultsInStream),
+				veniceIncludeVeniceSystemPrompt:
+					mode === "plan"
+						? (options.planModeVeniceIncludeVeniceSystemPrompt ?? options.veniceIncludeVeniceSystemPrompt)
+						: (options.actModeVeniceIncludeVeniceSystemPrompt ?? options.veniceIncludeVeniceSystemPrompt),
+				veniceStripThinkingResponse:
+					mode === "plan"
+						? (options.planModeVeniceStripThinkingResponse ?? options.veniceStripThinkingResponse)
+						: (options.actModeVeniceStripThinkingResponse ?? options.veniceStripThinkingResponse),
+				veniceDisableThinking:
+					mode === "plan"
+						? (options.planModeVeniceDisableThinking ?? options.veniceDisableThinking)
+						: (options.actModeVeniceDisableThinking ?? options.veniceDisableThinking),
 			})
 		default:
 			return new AnthropicHandler({

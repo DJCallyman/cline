@@ -102,8 +102,6 @@ export interface Settings {
 	difyBaseUrl: string | undefined
 	autoCondenseThreshold: number | undefined // number from 0 to 1
 	ocaBaseUrl: string | undefined
-
-	// Venice parameters
 	veniceEnableWebSearch: "auto" | "on" | "off" | undefined
 	veniceIncludeSearchResultsInStream: boolean | undefined
 	veniceIncludeVeniceSystemPrompt: boolean | undefined
@@ -144,6 +142,14 @@ export interface Settings {
 	planModeOcaModelInfo: OcaModelInfo | undefined
 	planModeVeniceModelId: string | undefined
 	planModeVeniceModelInfo: ModelInfo | undefined
+
+	// Plan mode Venice parameters
+	planModeVeniceEnableWebSearch: "auto" | "on" | "off" | undefined
+	planModeVeniceIncludeSearchResultsInStream: boolean | undefined
+	planModeVeniceIncludeVeniceSystemPrompt: boolean | undefined
+	planModeVeniceStripThinkingResponse: boolean | undefined
+	planModeVeniceDisableThinking: boolean | undefined
+
 	// Act mode configurations
 	actModeApiProvider: ApiProvider
 	actModeApiModelId: string | undefined
@@ -182,6 +188,13 @@ export interface Settings {
 	actModeOcaModelInfo: OcaModelInfo | undefined
 	actModeVeniceModelId: string | undefined
 	actModeVeniceModelInfo: ModelInfo | undefined
+
+	// Act mode Venice parameters
+	actModeVeniceEnableWebSearch: "auto" | "on" | "off" | undefined
+	actModeVeniceIncludeSearchResultsInStream: boolean | undefined
+	actModeVeniceIncludeVeniceSystemPrompt: boolean | undefined
+	actModeVeniceStripThinkingResponse: boolean | undefined
+	actModeVeniceDisableThinking: boolean | undefined
 }
 
 export interface Secrets {

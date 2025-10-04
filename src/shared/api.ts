@@ -121,8 +121,6 @@ export interface ApiHandlerOptions {
 	zaiApiLine?: string
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	ocaBaseUrl?: string
-
-	// Venice parameters
 	veniceEnableWebSearch?: "auto" | "on" | "off"
 	veniceIncludeSearchResultsInStream?: boolean
 	veniceIncludeVeniceSystemPrompt?: boolean
@@ -164,6 +162,12 @@ export interface ApiHandlerOptions {
 	planModeOcaModelInfo?: OcaModelInfo
 	planModeVeniceModelId?: string
 	planModeVeniceModelInfo?: ModelInfo
+	planModeVeniceEnableWebSearch?: "auto" | "on" | "off"
+	planModeVeniceIncludeSearchResultsInStream?: boolean
+	planModeVeniceIncludeVeniceSystemPrompt?: boolean
+	planModeVeniceStripThinkingResponse?: boolean
+	planModeVeniceDisableThinking?: boolean
+
 	// Act mode configurations
 
 	// Act mode configurations
@@ -201,6 +205,11 @@ export interface ApiHandlerOptions {
 	actModeOcaModelInfo?: OcaModelInfo
 	actModeVeniceModelId?: string
 	actModeVeniceModelInfo?: ModelInfo
+	actModeVeniceEnableWebSearch?: "auto" | "on" | "off"
+	actModeVeniceIncludeSearchResultsInStream?: boolean
+	actModeVeniceIncludeVeniceSystemPrompt?: boolean
+	actModeVeniceStripThinkingResponse?: boolean
+	actModeVeniceDisableThinking?: boolean
 }
 
 export type ApiConfiguration = ApiHandlerOptions &

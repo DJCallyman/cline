@@ -401,7 +401,6 @@ export class StateManager {
 			sapAiCoreTokenUrl,
 			sapAiResourceGroup,
 			veniceApiKey,
-			// Venice parameters
 			veniceEnableWebSearch,
 			veniceIncludeSearchResultsInStream,
 			veniceIncludeVeniceSystemPrompt,
@@ -455,6 +454,11 @@ export class StateManager {
 			planModeOcaModelInfo,
 			planModeVeniceModelId,
 			planModeVeniceModelInfo,
+			planModeVeniceEnableWebSearch,
+			planModeVeniceIncludeSearchResultsInStream,
+			planModeVeniceIncludeVeniceSystemPrompt,
+			planModeVeniceStripThinkingResponse,
+			planModeVeniceDisableThinking,
 			// Act mode configurations
 			actModeApiProvider,
 			actModeApiModelId,
@@ -491,6 +495,11 @@ export class StateManager {
 			actModeOcaModelInfo,
 			actModeVeniceModelId,
 			actModeVeniceModelInfo,
+			actModeVeniceEnableWebSearch,
+			actModeVeniceIncludeSearchResultsInStream,
+			actModeVeniceIncludeVeniceSystemPrompt,
+			actModeVeniceStripThinkingResponse,
+			actModeVeniceDisableThinking,
 		} = apiConfiguration
 
 		// Batch update global state keys
@@ -531,6 +540,11 @@ export class StateManager {
 			planModeOcaModelInfo,
 			planModeVeniceModelId,
 			planModeVeniceModelInfo,
+			planModeVeniceEnableWebSearch,
+			planModeVeniceIncludeSearchResultsInStream,
+			planModeVeniceIncludeVeniceSystemPrompt,
+			planModeVeniceStripThinkingResponse,
+			planModeVeniceDisableThinking,
 
 			// Act mode configuration updates
 			actModeApiProvider,
@@ -568,6 +582,11 @@ export class StateManager {
 			actModeOcaModelInfo,
 			actModeVeniceModelId,
 			actModeVeniceModelInfo,
+			actModeVeniceEnableWebSearch,
+			actModeVeniceIncludeSearchResultsInStream,
+			actModeVeniceIncludeVeniceSystemPrompt,
+			actModeVeniceStripThinkingResponse,
+			actModeVeniceDisableThinking,
 
 			// Global state updates
 			awsRegion,
@@ -607,7 +626,6 @@ export class StateManager {
 			difyBaseUrl,
 			qwenCodeOauthPath,
 			ocaBaseUrl,
-			// Venice parameters
 			veniceEnableWebSearch,
 			veniceIncludeSearchResultsInStream,
 			veniceIncludeVeniceSystemPrompt,
@@ -952,8 +970,6 @@ export class StateManager {
 			qwenCodeOauthPath: this.taskStateCache["qwenCodeOauthPath"] || this.globalStateCache["qwenCodeOauthPath"],
 			difyBaseUrl: this.taskStateCache["difyBaseUrl"] || this.globalStateCache["difyBaseUrl"],
 			ocaBaseUrl: this.globalStateCache["ocaBaseUrl"],
-
-			// Venice provider parameters
 			veniceEnableWebSearch: this.taskStateCache["veniceEnableWebSearch"] || this.globalStateCache["veniceEnableWebSearch"],
 			veniceIncludeSearchResultsInStream:
 				this.taskStateCache["veniceIncludeSearchResultsInStream"] ||
@@ -1030,6 +1046,11 @@ export class StateManager {
 			planModeOcaModelInfo: this.globalStateCache["planModeOcaModelInfo"],
 			planModeVeniceModelId: this.globalStateCache["planModeVeniceModelId"],
 			planModeVeniceModelInfo: this.globalStateCache["planModeVeniceModelInfo"],
+			planModeVeniceEnableWebSearch: this.globalStateCache["planModeVeniceEnableWebSearch"],
+			planModeVeniceIncludeSearchResultsInStream: this.globalStateCache["planModeVeniceIncludeSearchResultsInStream"],
+			planModeVeniceIncludeVeniceSystemPrompt: this.globalStateCache["planModeVeniceIncludeVeniceSystemPrompt"],
+			planModeVeniceStripThinkingResponse: this.globalStateCache["planModeVeniceStripThinkingResponse"],
+			planModeVeniceDisableThinking: this.globalStateCache["planModeVeniceDisableThinking"],
 
 			// Act mode configurations
 			actModeApiProvider: this.taskStateCache["actModeApiProvider"] || this.globalStateCache["actModeApiProvider"],
@@ -1094,6 +1115,11 @@ export class StateManager {
 			actModeOcaModelInfo: this.globalStateCache["actModeOcaModelInfo"],
 			actModeVeniceModelId: this.globalStateCache["actModeVeniceModelId"],
 			actModeVeniceModelInfo: this.globalStateCache["actModeVeniceModelInfo"],
+			actModeVeniceEnableWebSearch: this.globalStateCache["actModeVeniceEnableWebSearch"],
+			actModeVeniceIncludeSearchResultsInStream: this.globalStateCache["actModeVeniceIncludeSearchResultsInStream"],
+			actModeVeniceIncludeVeniceSystemPrompt: this.globalStateCache["actModeVeniceIncludeVeniceSystemPrompt"],
+			actModeVeniceStripThinkingResponse: this.globalStateCache["actModeVeniceStripThinkingResponse"],
+			actModeVeniceDisableThinking: this.globalStateCache["actModeVeniceDisableThinking"],
 		}
 
 		return config

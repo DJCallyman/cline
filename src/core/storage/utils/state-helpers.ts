@@ -208,7 +208,6 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const requestTimeoutMs = context.globalState.get<GlobalStateAndSettings["requestTimeoutMs"]>("requestTimeoutMs")
 		const shellIntegrationTimeout =
 			context.globalState.get<GlobalStateAndSettings["shellIntegrationTimeout"]>("shellIntegrationTimeout")
-		// Venice provider parameters
 		const veniceEnableWebSearch =
 			context.globalState.get<GlobalStateAndSettings["veniceEnableWebSearch"]>("veniceEnableWebSearch")
 		const veniceIncludeSearchResultsInStream = context.globalState.get<
@@ -333,6 +332,20 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const planModeVeniceModelId = context.globalState.get("planModeVeniceModelId") as string | undefined
 		const planModeVeniceModelInfo =
 			context.globalState.get<GlobalStateAndSettings["planModeVeniceModelInfo"]>("planModeVeniceModelInfo")
+		const planModeVeniceEnableWebSearch =
+			context.globalState.get<GlobalStateAndSettings["planModeVeniceEnableWebSearch"]>("planModeVeniceEnableWebSearch")
+		const planModeVeniceIncludeSearchResultsInStream = context.globalState.get<
+			GlobalStateAndSettings["planModeVeniceIncludeSearchResultsInStream"]
+		>("planModeVeniceIncludeSearchResultsInStream")
+		const planModeVeniceIncludeVeniceSystemPrompt = context.globalState.get<
+			GlobalStateAndSettings["planModeVeniceIncludeVeniceSystemPrompt"]
+		>("planModeVeniceIncludeVeniceSystemPrompt")
+		const planModeVeniceStripThinkingResponse = context.globalState.get<
+			GlobalStateAndSettings["planModeVeniceStripThinkingResponse"]
+		>("planModeVeniceStripThinkingResponse")
+		const planModeVeniceDisableThinking =
+			context.globalState.get<GlobalStateAndSettings["planModeVeniceDisableThinking"]>("planModeVeniceDisableThinking")
+
 		// Act mode configurations
 		const actModeApiProvider = context.globalState.get<GlobalStateAndSettings["actModeApiProvider"]>("actModeApiProvider")
 		const actModeApiModelId = context.globalState.get<GlobalStateAndSettings["actModeApiModelId"]>("actModeApiModelId")
@@ -402,6 +415,20 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const actModeVeniceModelId = context.globalState.get("actModeVeniceModelId") as string | undefined
 		const actModeVeniceModelInfo =
 			context.globalState.get<GlobalStateAndSettings["actModeVeniceModelInfo"]>("actModeVeniceModelInfo")
+		const actModeVeniceEnableWebSearch =
+			context.globalState.get<GlobalStateAndSettings["actModeVeniceEnableWebSearch"]>("actModeVeniceEnableWebSearch")
+		const actModeVeniceIncludeSearchResultsInStream = context.globalState.get<
+			GlobalStateAndSettings["actModeVeniceIncludeSearchResultsInStream"]
+		>("actModeVeniceIncludeSearchResultsInStream")
+		const actModeVeniceIncludeVeniceSystemPrompt = context.globalState.get<
+			GlobalStateAndSettings["actModeVeniceIncludeVeniceSystemPrompt"]
+		>("actModeVeniceIncludeVeniceSystemPrompt")
+		const actModeVeniceStripThinkingResponse = context.globalState.get<
+			GlobalStateAndSettings["actModeVeniceStripThinkingResponse"]
+		>("actModeVeniceStripThinkingResponse")
+		const actModeVeniceDisableThinking =
+			context.globalState.get<GlobalStateAndSettings["actModeVeniceDisableThinking"]>("actModeVeniceDisableThinking")
+
 		const sapAiCoreUseOrchestrationMode =
 			context.globalState.get<GlobalStateAndSettings["sapAiCoreUseOrchestrationMode"]>("sapAiCoreUseOrchestrationMode")
 
@@ -516,6 +543,11 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			planModeOcaModelInfo,
 			planModeVeniceModelId,
 			planModeVeniceModelInfo,
+			planModeVeniceEnableWebSearch,
+			planModeVeniceIncludeSearchResultsInStream,
+			planModeVeniceIncludeVeniceSystemPrompt,
+			planModeVeniceStripThinkingResponse,
+			planModeVeniceDisableThinking,
 			// Act mode configurations
 			actModeApiProvider: actModeApiProvider || apiProvider,
 			actModeApiModelId,
@@ -552,6 +584,11 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			actModeOcaModelInfo,
 			actModeVeniceModelId,
 			actModeVeniceModelInfo,
+			actModeVeniceEnableWebSearch,
+			actModeVeniceIncludeSearchResultsInStream,
+			actModeVeniceIncludeVeniceSystemPrompt,
+			actModeVeniceStripThinkingResponse,
+			actModeVeniceDisableThinking,
 
 			// Other global fields
 			focusChainSettings: focusChainSettings || DEFAULT_FOCUS_CHAIN_SETTINGS,
@@ -593,7 +630,6 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			// Feature flag - defaults to false
 			// For now, always return false to disable multi-root support by default
 			multiRootEnabled: !!multiRootEnabled,
-			// Venice provider parameters
 			veniceEnableWebSearch: veniceEnableWebSearch ?? "auto",
 			veniceIncludeSearchResultsInStream: veniceIncludeSearchResultsInStream ?? false,
 			veniceIncludeVeniceSystemPrompt: veniceIncludeVeniceSystemPrompt ?? true,
