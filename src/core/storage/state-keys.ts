@@ -142,8 +142,6 @@ export interface Settings {
 	planModeOcaModelInfo: OcaModelInfo | undefined
 	planModeVeniceModelId: string | undefined
 	planModeVeniceModelInfo: ModelInfo | undefined
-
-	// Plan mode Venice parameters
 	planModeVeniceEnableWebSearch: "auto" | "on" | "off" | undefined
 	planModeVeniceIncludeSearchResultsInStream: boolean | undefined
 	planModeVeniceIncludeVeniceSystemPrompt: boolean | undefined
@@ -188,8 +186,6 @@ export interface Settings {
 	actModeOcaModelInfo: OcaModelInfo | undefined
 	actModeVeniceModelId: string | undefined
 	actModeVeniceModelInfo: ModelInfo | undefined
-
-	// Act mode Venice parameters
 	actModeVeniceEnableWebSearch: "auto" | "on" | "off" | undefined
 	actModeVeniceIncludeSearchResultsInStream: boolean | undefined
 	actModeVeniceIncludeVeniceSystemPrompt: boolean | undefined
