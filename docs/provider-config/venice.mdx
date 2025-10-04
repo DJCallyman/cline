@@ -56,6 +56,42 @@ Venice offers four distinct models with different capabilities:
 2. **Select Provider:** Choose "Venice" from the "API Provider" dropdown.
 3. **Enter API Key:** Paste your Venice API key into the "Venice API Key" field.
 4. **Select Model:** Choose your desired model from the "Model" dropdown.
+5. **Configure Venice Parameters:** Customize the Venice-specific options below.
+
+#### Venice Parameters
+
+Venice provides several configurable parameters to customize model behavior:
+
+##### **Web Search**
+Controls when the model should perform web searches:
+- **Auto** (default): Let the model decide when to search
+- **On**: Always enable web search capabilities
+- **Off**: Disable web search entirely
+
+##### **Include Search Results in Stream**
+When web search is enabled, this option controls whether search results are included in the response stream. Enable this to see what sources the model found during web searches.
+
+##### **Include Venice System Prompt**
+Venice provides default system prompts designed for uncensored and natural responses. You can choose to:
+- **Enabled**: Your prompts are appended to Venice's default system prompts
+- **Disabled**: Use only your custom system prompts
+
+##### **Reasoning Controls** (qwen3-4b and qwen3-235b only)
+For reasoning-capable models, additional controls are available:
+
+- **Strip Thinking from Response**: Remove the `<think>` tags and reasoning process from the final response, showing only conclusions
+- **Disable Thinking Mode**: Turn off the step-by-step reasoning process entirely for faster responses
+
+### Venice Parameters in Practice
+
+When you select Venice as your provider, you'll see additional configuration options in the Cline settings panel:
+
+1. **Web Search dropdown**: Choose between Auto/On/Off
+2. **Include search results in stream**: Checkbox (only visible when web search is not "Off")
+3. **Include Venice system prompt**: Checkbox for system prompt behavior
+4. **Reasoning controls**: Additional checkboxes for thinking controls (only for qwen3-4b and qwen3-235b models)
+
+These parameters are automatically saved with your workspace configuration and will be remembered across Cline sessions. The reasoning controls will only appear when you select a reasoning-capable model.
 
 ### Privacy-First Architecture
 
@@ -118,11 +154,13 @@ The uncensored model provides:
 ### Tips and Notes
 
 - **Model Selection:** Choose models based on your specific needs:
-  - Use `qwen3-4b` for cost-effective general tasks
+  - Use `qwen3-4b` for cost-effective general tasks with reasoning capabilities
   - Use `mistral-31-24b` when you need vision capabilities
-  - Use `qwen3-235b` for complex reasoning tasks
+  - Use `qwen3-235b` for complex reasoning tasks requiring maximum capability
   - Use `venice-uncensored` for unrestricted content generation
+- **Reasoning Models:** Only `qwen3-4b` and `qwen3-235b` support advanced reasoning with thinking controls
+- **Web Search:** All models support web search, but you can control when and how it's used
 - **Privacy Advantage:** Venice's no-data-retention policy makes it ideal for sensitive or proprietary work
 - **Pricing:** Venice uses transparent pay-per-use pricing per 1M tokens. Check the [Venice Models page](https://docs.venice.ai/overview/models) for current rates
 - **API Compatibility:** Venice is fully compatible with OpenAI SDKs and existing code
-- **Beta Models:** Access to experimental models available for beta users
+- **Parameter Persistence:** All Venice parameter settings are saved per workspace and persist across Cline sessions
