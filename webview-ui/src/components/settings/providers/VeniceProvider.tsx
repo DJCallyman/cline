@@ -28,6 +28,28 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 	// Get the normalized configuration
 	const { selectedModelId, selectedModelInfo } = normalizeApiConfiguration(apiConfiguration, currentMode)
 
+	// Get mode-specific Venice parameters
+	const getModeSpecificParameter = (paramName: string) => {
+		if (currentMode === "plan") {
+			return apiConfiguration?.[`planMode${paramName}` as keyof typeof apiConfiguration]
+		} else {
+			return apiConfiguration?.[`actMode${paramName}` as keyof typeof apiConfiguration]
+		}
+	}
+
+	const getModeSpecificBooleanParameter = (paramName: string): boolean => {
+		return (getModeSpecificParameter(paramName) as boolean) || false
+	}
+
+	const getModeSpecificStringParameter = (paramName: string): string => {
+		return (getModeSpecificParameter(paramName) as string) || "auto"
+	}
+
+	const setModeSpecificParameter = (paramName: string, value: any) => {
+		const fieldName = currentMode === "plan" ? `planMode${paramName}` : `actMode${paramName}`
+		handleFieldChange(fieldName as any, value)
+	}
+
 	return (
 		<div>
 			<ApiKeyField
@@ -66,10 +88,10 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 							<VSCodeDropdown
 								id="venice-web-search"
 								onChange={(e: any) => {
-									handleFieldChange("veniceEnableWebSearch", e.target.value as "auto" | "on" | "off")
+									setModeSpecificParameter("VeniceEnableWebSearch", e.target.value as "auto" | "on" | "off")
 								}}
 								style={{ width: "100%" }}
-								value={apiConfiguration?.veniceEnableWebSearch || "auto"}>
+								value={getModeSpecificStringParameter("VeniceEnableWebSearch")}>
 								<VSCodeOption value="auto">Auto</VSCodeOption>
 								<VSCodeOption value="on">On</VSCodeOption>
 								<VSCodeOption value="off">Off</VSCodeOption>
@@ -77,14 +99,14 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 						</DropdownContainer>
 
 						{/* Include Search Results in Stream */}
-						{apiConfiguration?.veniceEnableWebSearch !== "off" && (
+						{getModeSpecificStringParameter("VeniceEnableWebSearch") !== "off" && (
 							<div className="flex items-center">
 								<input
-									checked={apiConfiguration?.veniceIncludeSearchResultsInStream || false}
+									checked={getModeSpecificBooleanParameter("VeniceIncludeSearchResultsInStream")}
 									className="mr-2"
 									id="veniceIncludeSearchResults"
 									onChange={(e) => {
-										handleFieldChange("veniceIncludeSearchResultsInStream", e.target.checked)
+										setModeSpecificParameter("VeniceIncludeSearchResultsInStream", e.target.checked)
 									}}
 									type="checkbox"
 								/>
@@ -97,10 +119,10 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 						{/* Include Venice System Prompt */}
 						<div className="flex items-center">
 							<input
-								checked={apiConfiguration?.veniceIncludeVeniceSystemPrompt || false}
+								checked={getModeSpecificBooleanParameter("VeniceIncludeVeniceSystemPrompt")}
 								className="mr-2"
 								id="veniceIncludeSystemPrompt"
-								onChange={(e) => handleFieldChange("veniceIncludeVeniceSystemPrompt", e.target.checked)}
+								onChange={(e) => setModeSpecificParameter("VeniceIncludeVeniceSystemPrompt", e.target.checked)}
 								type="checkbox"
 							/>
 							<label className="text-sm text-text-secondary" htmlFor="veniceIncludeSystemPrompt">
@@ -113,10 +135,12 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 							<>
 								<div className="flex items-center">
 									<input
-										checked={apiConfiguration?.veniceStripThinkingResponse || false}
+										checked={getModeSpecificBooleanParameter("VeniceStripThinkingResponse")}
 										className="mr-2"
 										id="veniceStripThinking"
-										onChange={(e) => handleFieldChange("veniceStripThinkingResponse", e.target.checked)}
+										onChange={(e) =>
+											setModeSpecificParameter("VeniceStripThinkingResponse", e.target.checked)
+										}
 										type="checkbox"
 									/>
 									<label className="text-sm text-text-secondary" htmlFor="veniceStripThinking">
@@ -126,10 +150,10 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 
 								<div className="flex items-center">
 									<input
-										checked={apiConfiguration?.veniceDisableThinking || false}
+										checked={getModeSpecificBooleanParameter("VeniceDisableThinking")}
 										className="mr-2"
 										id="veniceDisableThinking"
-										onChange={(e) => handleFieldChange("veniceDisableThinking", e.target.checked)}
+										onChange={(e) => setModeSpecificParameter("VeniceDisableThinking", e.target.checked)}
 										type="checkbox"
 									/>
 									<label className="text-sm text-text-secondary" htmlFor="veniceDisableThinking">

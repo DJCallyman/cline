@@ -401,11 +401,6 @@ export class StateManager {
 			sapAiCoreTokenUrl,
 			sapAiResourceGroup,
 			veniceApiKey,
-			veniceEnableWebSearch,
-			veniceIncludeSearchResultsInStream,
-			veniceIncludeVeniceSystemPrompt,
-			veniceStripThinkingResponse,
-			veniceDisableThinking,
 			sapAiCoreUseOrchestrationMode,
 			claudeCodePath,
 			qwenCodeOauthPath,
@@ -626,11 +621,6 @@ export class StateManager {
 			difyBaseUrl,
 			qwenCodeOauthPath,
 			ocaBaseUrl,
-			veniceEnableWebSearch,
-			veniceIncludeSearchResultsInStream,
-			veniceIncludeVeniceSystemPrompt,
-			veniceStripThinkingResponse,
-			veniceDisableThinking,
 		})
 
 		// Batch update secrets
@@ -970,16 +960,6 @@ export class StateManager {
 			qwenCodeOauthPath: this.taskStateCache["qwenCodeOauthPath"] || this.globalStateCache["qwenCodeOauthPath"],
 			difyBaseUrl: this.taskStateCache["difyBaseUrl"] || this.globalStateCache["difyBaseUrl"],
 			ocaBaseUrl: this.globalStateCache["ocaBaseUrl"],
-			veniceEnableWebSearch: this.taskStateCache["veniceEnableWebSearch"] || this.globalStateCache["veniceEnableWebSearch"],
-			veniceIncludeSearchResultsInStream:
-				this.taskStateCache["veniceIncludeSearchResultsInStream"] ||
-				this.globalStateCache["veniceIncludeSearchResultsInStream"],
-			veniceIncludeVeniceSystemPrompt:
-				this.taskStateCache["veniceIncludeVeniceSystemPrompt"] ||
-				this.globalStateCache["veniceIncludeVeniceSystemPrompt"],
-			veniceStripThinkingResponse:
-				this.taskStateCache["veniceStripThinkingResponse"] || this.globalStateCache["veniceStripThinkingResponse"],
-			veniceDisableThinking: this.taskStateCache["veniceDisableThinking"] || this.globalStateCache["veniceDisableThinking"],
 
 			// Plan mode configurations
 			planModeApiProvider: this.taskStateCache["planModeApiProvider"] || this.globalStateCache["planModeApiProvider"],

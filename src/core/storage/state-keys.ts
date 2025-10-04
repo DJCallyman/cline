@@ -102,11 +102,6 @@ export interface Settings {
 	difyBaseUrl: string | undefined
 	autoCondenseThreshold: number | undefined // number from 0 to 1
 	ocaBaseUrl: string | undefined
-	veniceEnableWebSearch: "auto" | "on" | "off" | undefined
-	veniceIncludeSearchResultsInStream: boolean | undefined
-	veniceIncludeVeniceSystemPrompt: boolean | undefined
-	veniceStripThinkingResponse: boolean | undefined
-	veniceDisableThinking: boolean | undefined
 
 	// Plan mode configurations
 	planModeApiProvider: ApiProvider

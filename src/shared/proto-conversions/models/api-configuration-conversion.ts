@@ -473,11 +473,6 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		difyBaseUrl: config.difyBaseUrl,
 		ocaBaseUrl: config.ocaBaseUrl,
 		veniceApiKey: config.veniceApiKey,
-		veniceEnableWebSearch: config.veniceEnableWebSearch,
-		veniceIncludeSearchResultsInStream: config.veniceIncludeSearchResultsInStream,
-		veniceIncludeVeniceSystemPrompt: config.veniceIncludeVeniceSystemPrompt,
-		veniceStripThinkingResponse: config.veniceStripThinkingResponse,
-		veniceDisableThinking: config.veniceDisableThinking,
 
 		// Plan mode configurations
 		planModeApiProvider: config.planModeApiProvider ? convertApiProviderToProto(config.planModeApiProvider) : undefined,
@@ -642,16 +637,6 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		difyBaseUrl: protoConfig.difyBaseUrl,
 		ocaBaseUrl: protoConfig.ocaBaseUrl,
 		veniceApiKey: protoConfig.veniceApiKey,
-		veniceEnableWebSearch:
-			protoConfig.veniceEnableWebSearch === "auto" ||
-			protoConfig.veniceEnableWebSearch === "on" ||
-			protoConfig.veniceEnableWebSearch === "off"
-				? (protoConfig.veniceEnableWebSearch as "auto" | "on" | "off")
-				: undefined,
-		veniceIncludeSearchResultsInStream: protoConfig.veniceIncludeSearchResultsInStream,
-		veniceIncludeVeniceSystemPrompt: protoConfig.veniceIncludeVeniceSystemPrompt,
-		veniceStripThinkingResponse: protoConfig.veniceStripThinkingResponse,
-		veniceDisableThinking: protoConfig.veniceDisableThinking,
 
 		// Plan mode configurations
 		planModeApiProvider:

@@ -121,11 +121,6 @@ export interface ApiHandlerOptions {
 	zaiApiLine?: string
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	ocaBaseUrl?: string
-	veniceEnableWebSearch?: "auto" | "on" | "off"
-	veniceIncludeSearchResultsInStream?: boolean
-	veniceIncludeVeniceSystemPrompt?: boolean
-	veniceStripThinkingResponse?: boolean
-	veniceDisableThinking?: boolean
 
 	// Plan mode configurations
 	planModeApiModelId?: string

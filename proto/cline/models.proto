@@ -326,11 +326,6 @@ message ModelsApiConfiguration {
   optional string oca_api_key = 74;
   optional string oca_refresh_token = 75;
   optional string venice_api_key = 76;
-  optional string venice_enable_web_search = 77;
-  optional bool venice_include_search_results_in_stream = 78;
-  optional bool venice_include_venice_system_prompt = 79;
-  optional bool venice_strip_thinking_response = 80;
-  optional bool venice_disable_thinking = 81;
 
   // Plan mode configurations
   optional ApiProvider plan_mode_api_provider = 100;

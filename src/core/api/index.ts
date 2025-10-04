@@ -395,25 +395,19 @@ function createHandlerForProvider(
 				veniceModelId: mode === "plan" ? options.planModeVeniceModelId : options.actModeVeniceModelId,
 				veniceModelInfo: mode === "plan" ? options.planModeVeniceModelInfo : options.actModeVeniceModelInfo,
 				veniceEnableWebSearch:
-					mode === "plan"
-						? (options.planModeVeniceEnableWebSearch ?? options.veniceEnableWebSearch)
-						: (options.actModeVeniceEnableWebSearch ?? options.veniceEnableWebSearch),
+					mode === "plan" ? options.planModeVeniceEnableWebSearch : options.actModeVeniceEnableWebSearch,
 				veniceIncludeSearchResultsInStream:
 					mode === "plan"
-						? (options.planModeVeniceIncludeSearchResultsInStream ?? options.veniceIncludeSearchResultsInStream)
-						: (options.actModeVeniceIncludeSearchResultsInStream ?? options.veniceIncludeSearchResultsInStream),
+						? options.planModeVeniceIncludeSearchResultsInStream
+						: options.actModeVeniceIncludeSearchResultsInStream,
 				veniceIncludeVeniceSystemPrompt:
 					mode === "plan"
-						? (options.planModeVeniceIncludeVeniceSystemPrompt ?? options.veniceIncludeVeniceSystemPrompt)
-						: (options.actModeVeniceIncludeVeniceSystemPrompt ?? options.veniceIncludeVeniceSystemPrompt),
+						? options.planModeVeniceIncludeVeniceSystemPrompt
+						: options.actModeVeniceIncludeVeniceSystemPrompt,
 				veniceStripThinkingResponse:
-					mode === "plan"
-						? (options.planModeVeniceStripThinkingResponse ?? options.veniceStripThinkingResponse)
-						: (options.actModeVeniceStripThinkingResponse ?? options.veniceStripThinkingResponse),
+					mode === "plan" ? options.planModeVeniceStripThinkingResponse : options.actModeVeniceStripThinkingResponse,
 				veniceDisableThinking:
-					mode === "plan"
-						? (options.planModeVeniceDisableThinking ?? options.veniceDisableThinking)
-						: (options.actModeVeniceDisableThinking ?? options.veniceDisableThinking),
+					mode === "plan" ? options.planModeVeniceDisableThinking : options.actModeVeniceDisableThinking,
 			})
 		default:
 			return new AnthropicHandler({

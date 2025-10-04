@@ -208,18 +208,6 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const requestTimeoutMs = context.globalState.get<GlobalStateAndSettings["requestTimeoutMs"]>("requestTimeoutMs")
 		const shellIntegrationTimeout =
 			context.globalState.get<GlobalStateAndSettings["shellIntegrationTimeout"]>("shellIntegrationTimeout")
-		const veniceEnableWebSearch =
-			context.globalState.get<GlobalStateAndSettings["veniceEnableWebSearch"]>("veniceEnableWebSearch")
-		const veniceIncludeSearchResultsInStream = context.globalState.get<
-			GlobalStateAndSettings["veniceIncludeSearchResultsInStream"]
-		>("veniceIncludeSearchResultsInStream")
-		const veniceIncludeVeniceSystemPrompt = context.globalState.get<
-			GlobalStateAndSettings["veniceIncludeVeniceSystemPrompt"]
-		>("veniceIncludeVeniceSystemPrompt")
-		const veniceStripThinkingResponse =
-			context.globalState.get<GlobalStateAndSettings["veniceStripThinkingResponse"]>("veniceStripThinkingResponse")
-		const veniceDisableThinking =
-			context.globalState.get<GlobalStateAndSettings["veniceDisableThinking"]>("veniceDisableThinking")
 		const enableCheckpointsSettingRaw =
 			context.globalState.get<GlobalStateAndSettings["enableCheckpointsSetting"]>("enableCheckpointsSetting")
 		const mcpMarketplaceEnabledRaw =
@@ -630,11 +618,6 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			// Feature flag - defaults to false
 			// For now, always return false to disable multi-root support by default
 			multiRootEnabled: !!multiRootEnabled,
-			veniceEnableWebSearch: veniceEnableWebSearch ?? "auto",
-			veniceIncludeSearchResultsInStream: veniceIncludeSearchResultsInStream ?? false,
-			veniceIncludeVeniceSystemPrompt: veniceIncludeVeniceSystemPrompt ?? true,
-			veniceStripThinkingResponse: veniceStripThinkingResponse ?? false,
-			veniceDisableThinking: veniceDisableThinking ?? false,
 		}
 	} catch (error) {
 		console.error("[StateHelpers] Failed to read global state:", error)
