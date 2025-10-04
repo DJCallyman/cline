@@ -1,10 +1,11 @@
 import { veniceModels } from "@shared/api"
 import { Mode } from "@shared/storage/types"
+import { VSCodeDropdown, VSCodeOption } from "@vscode/webview-ui-toolkit/react"
 import { type FC } from "react"
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { ApiKeyField } from "../common/ApiKeyField"
 import { ModelInfoView } from "../common/ModelInfoView"
-import { ModelSelector } from "../common/ModelSelector"
+import { DropdownContainer, ModelSelector } from "../common/ModelSelector"
 import { normalizeApiConfiguration } from "../utils/providerUtils"
 import { useApiConfigurationHandlers } from "../utils/useApiConfigurationHandlers"
 
@@ -58,19 +59,22 @@ export const VeniceProvider: FC<VeniceProviderProps> = ({ showModelOptions, isPo
 						<h4 className="text-sm font-medium text-text">Venice Parameters</h4>
 
 						{/* Web Search Setting */}
-						<div>
-							<label className="block text-sm text-text-secondary mb-1">Web Search</label>
-							<select
-								className="w-full px-3 py-2 border border-border rounded-md bg-background text-text text-sm"
-								onChange={(e) => {
+						<DropdownContainer>
+							<label htmlFor="venice-web-search">
+								<span style={{ fontWeight: 500 }}>Web Search</span>
+							</label>
+							<VSCodeDropdown
+								id="venice-web-search"
+								onChange={(e: any) => {
 									handleFieldChange("veniceEnableWebSearch", e.target.value as "auto" | "on" | "off")
 								}}
+								style={{ width: "100%" }}
 								value={apiConfiguration?.veniceEnableWebSearch || "auto"}>
-								<option value="auto">Auto</option>
-								<option value="on">On</option>
-								<option value="off">Off</option>
-							</select>
-						</div>
+								<VSCodeOption value="auto">Auto</VSCodeOption>
+								<VSCodeOption value="on">On</VSCodeOption>
+								<VSCodeOption value="off">Off</VSCodeOption>
+							</VSCodeDropdown>
+						</DropdownContainer>
 
 						{/* Include Search Results in Stream */}
 						{apiConfiguration?.veniceEnableWebSearch !== "off" && (

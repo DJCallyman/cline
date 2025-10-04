@@ -363,12 +363,11 @@ export function normalizeApiConfiguration(
 		case "venice":
 			const veniceModelId =
 				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelId : apiConfiguration?.actModeVeniceModelId
-			const veniceModelInfo =
-				currentMode === "plan" ? apiConfiguration?.planModeVeniceModelInfo : apiConfiguration?.actModeVeniceModelInfo
+			const currentVeniceModelId = veniceModelId || veniceDefaultModelId
 			return {
 				selectedProvider: provider,
-				selectedModelId: veniceModelId || veniceDefaultModelId,
-				selectedModelInfo: veniceModelInfo || veniceModels[veniceDefaultModelId as VeniceModelId],
+				selectedModelId: currentVeniceModelId,
+				selectedModelInfo: veniceModels[currentVeniceModelId as VeniceModelId],
 			}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
