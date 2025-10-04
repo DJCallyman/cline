@@ -326,6 +326,13 @@ message ModelsApiConfiguration {
   optional string oca_api_key = 74;
   optional string oca_refresh_token = 75;
   optional string venice_api_key = 76;
+  
+  // Venice parameters (global settings)
+  optional string venice_enable_web_search = 77;
+  optional bool venice_include_search_results_in_stream = 78;
+  optional bool venice_include_venice_system_prompt = 79;
+  optional bool venice_strip_thinking_response = 80;
+  optional bool venice_disable_thinking = 81;
 
   // Plan mode configurations
   optional ApiProvider plan_mode_api_provider = 100;
@@ -363,6 +370,13 @@ message ModelsApiConfiguration {
   optional OcaModelInfo plan_mode_oca_model_info = 132;
   optional string plan_mode_venice_model_id = 133;
   optional OpenRouterModelInfo plan_mode_venice_model_info = 134;
+  
+  // Plan mode Venice parameters
+  optional string plan_mode_venice_enable_web_search = 135;
+  optional bool plan_mode_venice_include_search_results_in_stream = 136;
+  optional bool plan_mode_venice_include_venice_system_prompt = 137;
+  optional bool plan_mode_venice_strip_thinking_response = 138;
+  optional bool plan_mode_venice_disable_thinking = 139;
 
   // Act mode configurations
   optional ApiProvider act_mode_api_provider = 200;
@@ -400,4 +414,11 @@ message ModelsApiConfiguration {
   optional OcaModelInfo act_mode_oca_model_info = 232;
   optional string act_mode_venice_model_id = 233;
   optional OpenRouterModelInfo act_mode_venice_model_info = 234;
+  
+  // Act mode Venice parameters
+  optional string act_mode_venice_enable_web_search = 235;
+  optional bool act_mode_venice_include_search_results_in_stream = 236;
+  optional bool act_mode_venice_include_venice_system_prompt = 237;
+  optional bool act_mode_venice_strip_thinking_response = 238;
+  optional bool act_mode_venice_disable_thinking = 239;
 }

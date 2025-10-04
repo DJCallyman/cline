@@ -401,6 +401,12 @@ export class StateManager {
 			sapAiCoreTokenUrl,
 			sapAiResourceGroup,
 			veniceApiKey,
+			// Venice parameters
+			veniceEnableWebSearch,
+			veniceIncludeSearchResultsInStream,
+			veniceIncludeVeniceSystemPrompt,
+			veniceStripThinkingResponse,
+			veniceDisableThinking,
 			sapAiCoreUseOrchestrationMode,
 			claudeCodePath,
 			qwenCodeOauthPath,
@@ -601,6 +607,12 @@ export class StateManager {
 			difyBaseUrl,
 			qwenCodeOauthPath,
 			ocaBaseUrl,
+			// Venice parameters
+			veniceEnableWebSearch,
+			veniceIncludeSearchResultsInStream,
+			veniceIncludeVeniceSystemPrompt,
+			veniceStripThinkingResponse,
+			veniceDisableThinking,
 		})
 
 		// Batch update secrets
@@ -856,7 +868,7 @@ export class StateManager {
 	 * Construct API configuration from cached component keys
 	 */
 	private constructApiConfigurationFromCache(): ApiConfiguration {
-		return {
+		const config = {
 			// Secrets
 			apiKey: this.secretsCache["apiKey"],
 			openRouterApiKey: this.secretsCache["openRouterApiKey"],
@@ -940,6 +952,18 @@ export class StateManager {
 			qwenCodeOauthPath: this.taskStateCache["qwenCodeOauthPath"] || this.globalStateCache["qwenCodeOauthPath"],
 			difyBaseUrl: this.taskStateCache["difyBaseUrl"] || this.globalStateCache["difyBaseUrl"],
 			ocaBaseUrl: this.globalStateCache["ocaBaseUrl"],
+
+			// Venice provider parameters
+			veniceEnableWebSearch: this.taskStateCache["veniceEnableWebSearch"] || this.globalStateCache["veniceEnableWebSearch"],
+			veniceIncludeSearchResultsInStream:
+				this.taskStateCache["veniceIncludeSearchResultsInStream"] ||
+				this.globalStateCache["veniceIncludeSearchResultsInStream"],
+			veniceIncludeVeniceSystemPrompt:
+				this.taskStateCache["veniceIncludeVeniceSystemPrompt"] ||
+				this.globalStateCache["veniceIncludeVeniceSystemPrompt"],
+			veniceStripThinkingResponse:
+				this.taskStateCache["veniceStripThinkingResponse"] || this.globalStateCache["veniceStripThinkingResponse"],
+			veniceDisableThinking: this.taskStateCache["veniceDisableThinking"] || this.globalStateCache["veniceDisableThinking"],
 
 			// Plan mode configurations
 			planModeApiProvider: this.taskStateCache["planModeApiProvider"] || this.globalStateCache["planModeApiProvider"],
@@ -1071,5 +1095,7 @@ export class StateManager {
 			actModeVeniceModelId: this.globalStateCache["actModeVeniceModelId"],
 			actModeVeniceModelInfo: this.globalStateCache["actModeVeniceModelInfo"],
 		}
+
+		return config
 	}
 }

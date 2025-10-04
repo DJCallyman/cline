@@ -474,6 +474,13 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		ocaBaseUrl: config.ocaBaseUrl,
 		veniceApiKey: config.veniceApiKey,
 
+		// Venice parameters
+		veniceEnableWebSearch: config.veniceEnableWebSearch,
+		veniceIncludeSearchResultsInStream: config.veniceIncludeSearchResultsInStream,
+		veniceIncludeVeniceSystemPrompt: config.veniceIncludeVeniceSystemPrompt,
+		veniceStripThinkingResponse: config.veniceStripThinkingResponse,
+		veniceDisableThinking: config.veniceDisableThinking,
+
 		// Plan mode configurations
 		planModeApiProvider: config.planModeApiProvider ? convertApiProviderToProto(config.planModeApiProvider) : undefined,
 		planModeApiModelId: config.planModeApiModelId,
@@ -552,7 +559,7 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 
 // Converts proto ApiConfiguration to application ApiConfiguration
 export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguration): ApiConfiguration {
-	return {
+	const result = {
 		// Global configuration fields
 		apiKey: protoConfig.apiKey,
 		clineAccountId: protoConfig.clineAccountId,
@@ -627,6 +634,18 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		difyBaseUrl: protoConfig.difyBaseUrl,
 		ocaBaseUrl: protoConfig.ocaBaseUrl,
 		veniceApiKey: protoConfig.veniceApiKey,
+
+		// Venice parameters
+		veniceEnableWebSearch:
+			protoConfig.veniceEnableWebSearch === "auto" ||
+			protoConfig.veniceEnableWebSearch === "on" ||
+			protoConfig.veniceEnableWebSearch === "off"
+				? (protoConfig.veniceEnableWebSearch as "auto" | "on" | "off")
+				: undefined,
+		veniceIncludeSearchResultsInStream: protoConfig.veniceIncludeSearchResultsInStream,
+		veniceIncludeVeniceSystemPrompt: protoConfig.veniceIncludeVeniceSystemPrompt,
+		veniceStripThinkingResponse: protoConfig.veniceStripThinkingResponse,
+		veniceDisableThinking: protoConfig.veniceDisableThinking,
 
 		// Plan mode configurations
 		planModeApiProvider:
@@ -706,4 +725,6 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		actModeVeniceModelId: protoConfig.actModeVeniceModelId,
 		actModeVeniceModelInfo: convertProtoToModelInfo(protoConfig.actModeVeniceModelInfo),
 	}
+
+	return result
 }

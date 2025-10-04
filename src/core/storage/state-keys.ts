@@ -103,6 +103,13 @@ export interface Settings {
 	autoCondenseThreshold: number | undefined // number from 0 to 1
 	ocaBaseUrl: string | undefined
 
+	// Venice parameters
+	veniceEnableWebSearch: "auto" | "on" | "off" | undefined
+	veniceIncludeSearchResultsInStream: boolean | undefined
+	veniceIncludeVeniceSystemPrompt: boolean | undefined
+	veniceStripThinkingResponse: boolean | undefined
+	veniceDisableThinking: boolean | undefined
+
 	// Plan mode configurations
 	planModeApiProvider: ApiProvider
 	planModeApiModelId: string | undefined

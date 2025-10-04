@@ -122,6 +122,13 @@ export interface ApiHandlerOptions {
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	ocaBaseUrl?: string
 
+	// Venice parameters
+	veniceEnableWebSearch?: "auto" | "on" | "off"
+	veniceIncludeSearchResultsInStream?: boolean
+	veniceIncludeVeniceSystemPrompt?: boolean
+	veniceStripThinkingResponse?: boolean
+	veniceDisableThinking?: boolean
+
 	// Plan mode configurations
 	planModeApiModelId?: string
 	planModeThinkingBudgetTokens?: number
@@ -3703,7 +3710,8 @@ export const veniceModels = {
 		supportsPromptCache: true,
 		inputPrice: 0.9,
 		outputPrice: 4.5,
-		description: "Venice Large 1.1 - Most powerful flagship model with advanced reasoning capabilities",
+		description:
+			"Venice Large 1.1 - Most powerful flagship model with advanced reasoning capabilities, function calling, and web search",
 	},
 	"mistral-31-24b": {
 		maxTokens: 32768,
@@ -3712,7 +3720,8 @@ export const veniceModels = {
 		supportsPromptCache: true,
 		inputPrice: 0.5,
 		outputPrice: 2.0,
-		description: "Venice Medium (3.1) - Vision + function calling",
+		description:
+			"Venice Medium (3.1) - Vision + function calling + web search. The only Venice model with image understanding",
 	},
 	"qwen3-4b": {
 		maxTokens: 8192,
@@ -3721,7 +3730,7 @@ export const veniceModels = {
 		supportsPromptCache: true,
 		inputPrice: 0.05,
 		outputPrice: 0.15,
-		description: "Venice Small - Fast, affordable for most tasks",
+		description: "Venice Small - Fast, affordable model with reasoning capabilities, function calling, and web search",
 	},
 	"venice-uncensored": {
 		maxTokens: 8192,
@@ -3730,6 +3739,7 @@ export const veniceModels = {
 		supportsPromptCache: true,
 		inputPrice: 0.2,
 		outputPrice: 0.9,
-		description: "Venice Uncensored 1.1 - No content filtering",
+		description:
+			"Venice Uncensored 1.1 - No content filtering. Supports function calling, web search, and structured responses",
 	},
 } as const satisfies Record<string, ModelInfo>

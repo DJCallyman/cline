@@ -394,6 +394,11 @@ function createHandlerForProvider(
 				veniceApiKey: options.veniceApiKey,
 				veniceModelId: mode === "plan" ? options.planModeVeniceModelId : options.actModeVeniceModelId,
 				veniceModelInfo: mode === "plan" ? options.planModeVeniceModelInfo : options.actModeVeniceModelInfo,
+				veniceEnableWebSearch: options.veniceEnableWebSearch,
+				veniceIncludeSearchResultsInStream: options.veniceIncludeSearchResultsInStream,
+				veniceIncludeVeniceSystemPrompt: options.veniceIncludeVeniceSystemPrompt,
+				veniceStripThinkingResponse: options.veniceStripThinkingResponse,
+				veniceDisableThinking: options.veniceDisableThinking,
 			})
 		default:
 			return new AnthropicHandler({

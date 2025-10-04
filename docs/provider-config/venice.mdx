@@ -20,14 +20,35 @@ Venice AI is a privacy-first AI platform that provides access to powerful langua
 
 ### Supported Models
 
-Cline supports the following Venice models:
+Venice offers four distinct models with different capabilities:
 
-- `venice-uncensored` (Venice Uncensored 1.1) - No content filtering, 32K context
-- `qwen3-4b` (Venice Small) - Fast and affordable for most tasks, 41K context
-- `mistral-31-24b` (Venice Medium 3.1) - Vision capabilities and function calling, 131K context
-- `qwen3-235b` (Venice Large 1.1) - Most powerful flagship model with advanced reasoning, 131K context
-- `llama-3.3-70b` (Llama 3.3 70B) - Balanced high-performance model, 65K context
-- `llama-3.2-3b` (Llama 3.2 3B) - Fastest for simple tasks, 131K context
+#### **qwen3-235b** (Large Model)
+- **Context Window:** 131,072 tokens
+- **Max Output:** 32,768 tokens  
+- **Special Features:** Advanced reasoning, function calling, web search, structured responses
+- **Best For:** Complex reasoning tasks, coding projects, and detailed analysis
+- **Pricing:** $0.90/1M input, $4.50/1M output tokens
+
+#### **mistral-31-24b** (Vision Model)
+- **Context Window:** 131,072 tokens
+- **Max Output:** 32,768 tokens
+- **Special Features:** Image understanding, function calling, web search, vision processing
+- **Best For:** Multimodal tasks requiring both text and image analysis
+- **Pricing:** $0.50/1M input, $2.00/1M output tokens
+
+#### **qwen3-4b** (Small Model)
+- **Context Window:** 40,960 tokens
+- **Max Output:** 8,192 tokens
+- **Special Features:** Reasoning capabilities, function calling, web search
+- **Best For:** Fast inference, cost-effective tasks, general programming
+- **Pricing:** $0.05/1M input, $0.15/1M output tokens
+
+#### **venice-uncensored** (Default)
+- **Context Window:** 32,768 tokens
+- **Max Output:** 8,192 tokens
+- **Special Features:** No content filtering, function calling, web search, structured responses
+- **Best For:** Creative tasks without content restrictions
+- **Pricing:** $0.20/1M input, $0.90/1M output tokens
 
 ### Configuration in Cline
 
@@ -51,17 +72,48 @@ Venice provides full OpenAI API compatibility, making it easy to integrate with 
 
 ### Special Features
 
-#### Vision Processing
-The `mistral-31-24b` model supports image understanding and processing capabilities.
+Venice models come with several built-in capabilities that enhance their functionality:
 
-#### Reasoning Mode
-Models like `qwen3-235b` and `qwen3-4b` offer enhanced reasoning capabilities for complex problem-solving tasks.
+#### **Function Calling / Tools**
+All Venice models support function calling, allowing them to use external tools and APIs. This enables:
+- Web searches and real-time information retrieval
+- API integrations and database queries  
+- Custom function execution
 
-#### Uncensored Options
-The `venice-uncensored` model provides unrestricted content generation without filtering.
+#### **Web Search Integration**
+All Venice models can perform real-time web searches with:
+- Automatic search query generation
+- Source citations and references
+- Up-to-date information retrieval
+- Configurable search behavior (`auto`, `on`, `off`)
 
-#### Function Calling
-Select models support function calling for tool integration and structured outputs.
+#### **Vision Processing** (mistral-31-24b only)
+The Mistral model provides advanced image understanding:
+- Image analysis and description
+- Visual question answering
+- Chart and diagram interpretation
+- Combined vision + web search capabilities
+
+#### **Reasoning Mode** (qwen3-235b, qwen3-4b)
+Select models offer enhanced reasoning with:
+- Step-by-step problem solving
+- Visible thinking process in `<think>` tags
+- Configurable reasoning display options
+- Advanced mathematical and logical reasoning
+
+#### **Structured Responses**
+Most Venice models support JSON schema-based structured outputs:
+- Guaranteed response format compliance
+- Reduced hallucination in structured data
+- OpenAI-compatible `response_format` parameter
+- Perfect for data extraction and API responses
+
+#### **No Content Filtering** (venice-uncensored)
+The uncensored model provides:
+- Minimal content restrictions
+- Creative freedom for artistic work
+- Research and educational applications
+- Full capability access without filtering
 
 ### Tips and Notes
 
