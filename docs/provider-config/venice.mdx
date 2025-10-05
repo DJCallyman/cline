@@ -151,16 +151,101 @@ The uncensored model provides:
 - Research and educational applications
 - Full capability access without filtering
 
+### Technical Implementation
+
+Venice in Cline follows the OpenAI reasoning effort pattern for parameter handling and includes advanced capability detection that intelligently adapts tool availability based on the selected model:
+
+#### **Automatic Capability Detection**
+Cline automatically detects what each Venice model can do and adjusts the available tools accordingly:
+
+- **Vision Tasks**: Only offered when `mistral-31-24b` is selected
+- **Function Calling**: Available for all Venice models with enhanced reliability
+- **Web Search**: Automatically integrated with configurable behavior
+- **Reasoning Display**: Thinking controls only appear for reasoning-capable models (`qwen3-4b`, `qwen3-235b`)
+- **Structured Outputs**: JSON schema support detected per model
+
+This means you'll only see relevant options in the Cline interface based on your selected model's actual capabilities.
+
+#### **Parameter Architecture**
+Venice follows the established OpenAI pattern for parameter handling:
+
+- **Global Settings**: Use enum types in `state.proto` for UI consistency
+- **Mode-Specific Configuration**: Use string types in `models.proto` for API flexibility
+- **Automatic Conversion**: Seamless conversion between enum and string types
+- **Complete Persistence**: All parameters save correctly across sessions
+
+#### **Mode-Specific Configuration**
+Venice parameters are configured separately for Plan Mode and Act Mode, allowing you to:
+
+- Use different web search settings for planning vs. execution
+- Enable reasoning display in Plan Mode but strip thinking in Act Mode
+- Customize Venice system prompt usage per mode
+- Fine-tune model behavior for different phases of task execution
+
+All Venice parameters automatically persist across Cline sessions and are saved per workspace.
+
+### Advanced Features
+
+#### **Web Search Integration**
+Venice's web search goes beyond simple queries:
+
+- **Context-Aware Searches**: Models understand when information needs to be current
+- **Source Integration**: Search results are seamlessly woven into responses
+- **Citation Tracking**: When enabled, see exactly what sources influenced the response
+- **Multi-Step Research**: Models can perform multiple related searches automatically
+
+#### **Reasoning Transparency**
+For reasoning-capable models (qwen3-4b, qwen3-235b):
+
+- **Visible Thinking**: See the model's step-by-step problem-solving process
+- **Flexible Display**: Choose whether to show, hide, or strip reasoning from responses
+- **Enhanced Accuracy**: Reasoning mode improves complex problem-solving
+- **Debug Assistance**: Thinking process helps understand model decisions
+
+#### **Privacy-First Design**
+Venice's architecture ensures maximum privacy:
+
+- **Zero Data Retention**: No conversation logs, model training, or data mining
+- **Real-Time Processing**: Requests processed and immediately discarded
+- **No Content Filtering**: Uncensored model available for unrestricted creative work
+- **Full API Compatibility**: Drop-in replacement for OpenAI with privacy benefits
+
 ### Tips and Notes
 
 - **Model Selection:** Choose models based on your specific needs:
   - Use `qwen3-4b` for cost-effective general tasks with reasoning capabilities
-  - Use `mistral-31-24b` when you need vision capabilities
+  - Use `mistral-31-24b` when you need vision capabilities or multimodal analysis
   - Use `qwen3-235b` for complex reasoning tasks requiring maximum capability
-  - Use `venice-uncensored` for unrestricted content generation
+  - Use `venice-uncensored` for unrestricted content generation without filtering
 - **Reasoning Models:** Only `qwen3-4b` and `qwen3-235b` support advanced reasoning with thinking controls
-- **Web Search:** All models support web search, but you can control when and how it's used
+- **Web Search:** All models support web search, but you can control when and how it's used through the dropdown
 - **Privacy Advantage:** Venice's no-data-retention policy makes it ideal for sensitive or proprietary work
 - **Pricing:** Venice uses transparent pay-per-use pricing per 1M tokens. Check the [Venice Models page](https://docs.venice.ai/overview/models) for current rates
 - **API Compatibility:** Venice is fully compatible with OpenAI SDKs and existing code
 - **Parameter Persistence:** All Venice parameter settings are saved per workspace and persist across Cline sessions
+- **Capability Detection:** Cline automatically shows only relevant options based on your selected model's capabilities
+- **Mode Configuration:** Set different Venice parameters for Plan Mode vs. Act Mode to optimize workflow
+- **Real-Time Features:** Web search and function calling work seamlessly with Cline's tool system
+- **Implementation Status:** Venice provider is functionally complete and production-ready in Cline
+
+### Troubleshooting
+
+#### **API Key Issues**
+- Ensure you copied the full API key immediately after generation
+- Check that the key hasn't expired if you set an expiration date
+- Verify the key has "Inference Only" permissions for regular usage
+
+#### **Parameter Not Persisting**
+- Verify that you're configuring parameters for the correct mode (Plan/Act)
+- Check that the workspace settings are being saved properly
+- Try refreshing the Cline interface if parameters don't appear to update
+
+#### **Model-Specific Features**
+- Reasoning controls only appear for `qwen3-4b` and `qwen3-235b`
+- Vision capabilities are only available with `mistral-31-24b`
+- If you don't see expected features, confirm you've selected the correct model
+
+#### **Web Search Not Working**
+- Ensure web search is set to "Auto" or "On" in the Venice parameters
+- Check that your selected model supports web search (all Venice models do)
+- Verify your API key has the necessary permissions for enhanced features
