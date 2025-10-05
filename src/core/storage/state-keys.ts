@@ -9,7 +9,7 @@ import { DictationSettings } from "@/shared/DictationSettings"
 import { HistoryItem } from "@/shared/HistoryItem"
 import { McpDisplayMode } from "@/shared/McpDisplayMode"
 import { McpMarketplaceCatalog } from "@/shared/mcp"
-import { Mode, OpenaiReasoningEffort } from "@/shared/storage/types"
+import { Mode, OpenaiReasoningEffort, VeniceWebSearch } from "@/shared/storage/types"
 import { TelemetrySetting } from "@/shared/TelemetrySetting"
 import { UserInfo } from "@/shared/UserInfo"
 export type SecretKey = keyof Secrets
@@ -95,6 +95,7 @@ export interface Settings {
 	useAutoCondense: boolean
 	preferredLanguage: string
 	openaiReasoningEffort: OpenaiReasoningEffort
+	veniceEnableWebSearch: VeniceWebSearch
 	mode: Mode
 	dictationSettings: DictationSettings
 	focusChainSettings: FocusChainSettings
@@ -137,7 +138,7 @@ export interface Settings {
 	planModeOcaModelInfo: OcaModelInfo | undefined
 	planModeVeniceModelId: string | undefined
 	planModeVeniceModelInfo: ModelInfo | undefined
-	planModeVeniceEnableWebSearch: "auto" | "on" | "off" | undefined
+	planModeVeniceEnableWebSearch: string | undefined
 	planModeVeniceIncludeSearchResultsInStream: boolean | undefined
 	planModeVeniceIncludeVeniceSystemPrompt: boolean | undefined
 	planModeVeniceStripThinkingResponse: boolean | undefined
@@ -181,7 +182,7 @@ export interface Settings {
 	actModeOcaModelInfo: OcaModelInfo | undefined
 	actModeVeniceModelId: string | undefined
 	actModeVeniceModelInfo: ModelInfo | undefined
-	actModeVeniceEnableWebSearch: "auto" | "on" | "off" | undefined
+	actModeVeniceEnableWebSearch: string | undefined
 	actModeVeniceIncludeSearchResultsInStream: boolean | undefined
 	actModeVeniceIncludeVeniceSystemPrompt: boolean | undefined
 	actModeVeniceStripThinkingResponse: boolean | undefined

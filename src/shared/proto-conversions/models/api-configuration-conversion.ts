@@ -677,12 +677,7 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		planModeOcaModelInfo: convertProtoOcaModelInfoToOcaModelInfo(protoConfig.planModeOcaModelInfo),
 		planModeVeniceModelId: protoConfig.planModeVeniceModelId,
 		planModeVeniceModelInfo: convertProtoToModelInfo(protoConfig.planModeVeniceModelInfo),
-		planModeVeniceEnableWebSearch:
-			protoConfig.planModeVeniceEnableWebSearch === "auto" ||
-			protoConfig.planModeVeniceEnableWebSearch === "on" ||
-			protoConfig.planModeVeniceEnableWebSearch === "off"
-				? (protoConfig.planModeVeniceEnableWebSearch as "auto" | "on" | "off")
-				: undefined,
+		planModeVeniceEnableWebSearch: protoConfig.planModeVeniceEnableWebSearch,
 		planModeVeniceIncludeSearchResultsInStream: protoConfig.planModeVeniceIncludeSearchResultsInStream,
 		planModeVeniceIncludeVeniceSystemPrompt: protoConfig.planModeVeniceIncludeVeniceSystemPrompt,
 		planModeVeniceStripThinkingResponse: protoConfig.planModeVeniceStripThinkingResponse,
@@ -725,12 +720,7 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		actModeOcaModelInfo: convertProtoOcaModelInfoToOcaModelInfo(protoConfig.actModeOcaModelInfo),
 		actModeVeniceModelId: protoConfig.actModeVeniceModelId,
 		actModeVeniceModelInfo: convertProtoToModelInfo(protoConfig.actModeVeniceModelInfo),
-		actModeVeniceEnableWebSearch:
-			protoConfig.actModeVeniceEnableWebSearch === "auto" ||
-			protoConfig.actModeVeniceEnableWebSearch === "on" ||
-			protoConfig.actModeVeniceEnableWebSearch === "off"
-				? (protoConfig.actModeVeniceEnableWebSearch as "auto" | "on" | "off")
-				: undefined,
+		actModeVeniceEnableWebSearch: protoConfig.actModeVeniceEnableWebSearch,
 		actModeVeniceIncludeSearchResultsInStream: protoConfig.actModeVeniceIncludeSearchResultsInStream,
 		actModeVeniceIncludeVeniceSystemPrompt: protoConfig.actModeVeniceIncludeVeniceSystemPrompt,
 		actModeVeniceStripThinkingResponse: protoConfig.actModeVeniceStripThinkingResponse,

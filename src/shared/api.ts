@@ -157,7 +157,7 @@ export interface ApiHandlerOptions {
 	planModeOcaModelInfo?: OcaModelInfo
 	planModeVeniceModelId?: string
 	planModeVeniceModelInfo?: ModelInfo
-	planModeVeniceEnableWebSearch?: "auto" | "on" | "off"
+	planModeVeniceEnableWebSearch?: string
 	planModeVeniceIncludeSearchResultsInStream?: boolean
 	planModeVeniceIncludeVeniceSystemPrompt?: boolean
 	planModeVeniceStripThinkingResponse?: boolean
@@ -200,7 +200,7 @@ export interface ApiHandlerOptions {
 	actModeOcaModelInfo?: OcaModelInfo
 	actModeVeniceModelId?: string
 	actModeVeniceModelInfo?: ModelInfo
-	actModeVeniceEnableWebSearch?: "auto" | "on" | "off"
+	actModeVeniceEnableWebSearch?: string
 	actModeVeniceIncludeSearchResultsInStream?: boolean
 	actModeVeniceIncludeVeniceSystemPrompt?: boolean
 	actModeVeniceStripThinkingResponse?: boolean

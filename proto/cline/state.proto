@@ -65,6 +65,12 @@ enum OpenaiReasoningEffort {
   MINIMAL = 3;
 }
 
+enum VeniceWebSearch {
+  AUTO = 0;
+  ON = 1;
+  OFF = 2;
+}
+
 enum McpDisplayMode {
   RICH = 0;
   PLAIN = 1;
@@ -139,6 +145,7 @@ message UpdateSettingsRequest {
   optional PlanActMode mode = 13;
   optional string preferred_language = 14;
   optional OpenaiReasoningEffort openai_reasoning_effort = 15;
+  optional VeniceWebSearch venice_enable_web_search = 26;
   optional bool strict_plan_mode_enabled = 16;
   optional FocusChainSettings focus_chain_settings = 17;
   optional bool use_auto_condense = 18;
@@ -225,7 +232,7 @@ message ApiConfiguration {
   
   // Venice configuration
   optional string venice_api_key = 69;
-  optional string venice_enable_web_search = 70;
+  optional VeniceWebSearch venice_enable_web_search = 70;
   optional bool venice_include_search_results_in_stream = 71;
   optional bool venice_include_venice_system_prompt = 72;
   optional bool venice_strip_thinking_response = 73;
@@ -258,8 +265,6 @@ message ApiConfiguration {
   optional OpenRouterModelInfo plan_mode_vercel_ai_gateway_model_info = 123;
   optional string plan_mode_oca_model_id = 124;
   optional OcaModelInfo plan_mode_oca_model_info = 125;
-  
-  // Plan mode Venice configuration
   optional string plan_mode_venice_model_id = 126;
   optional OpenRouterModelInfo plan_mode_venice_model_info = 127;
   optional string plan_mode_venice_enable_web_search = 128;
@@ -295,8 +300,6 @@ message ApiConfiguration {
   optional OpenRouterModelInfo act_mode_vercel_ai_gateway_model_info = 223;
   optional string act_mode_oca_model_id = 224;
   optional OcaModelInfo act_mode_oca_model_info = 225;
-  
-  // Act mode Venice configuration
   optional string act_mode_venice_model_id = 226;
   optional OpenRouterModelInfo act_mode_venice_model_info = 227;
   optional string act_mode_venice_enable_web_search = 228;

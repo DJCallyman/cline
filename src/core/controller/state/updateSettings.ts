@@ -5,10 +5,11 @@ import {
 	PlanActMode,
 	McpDisplayMode as ProtoMcpDisplayMode,
 	OpenaiReasoningEffort as ProtoOpenaiReasoningEffort,
+	VeniceWebSearch as ProtoVeniceWebSearch,
 	UpdateSettingsRequest,
 } from "@shared/proto/cline/state"
-import { convertProtoToApiConfiguration } from "@shared/proto-conversions/models/api-configuration-conversion"
-import { OpenaiReasoningEffort } from "@shared/storage/types"
+import { convertProtoToApiProvider } from "@shared/proto-conversions/models/api-configuration-conversion"
+import { OpenaiReasoningEffort, VeniceWebSearch } from "@shared/storage/types"
 import { TelemetrySetting } from "@shared/TelemetrySetting"
 import { HostProvider } from "@/hosts/host-provider"
 import { TerminalInfo } from "@/integrations/terminal/TerminalRegistry"
@@ -27,7 +28,18 @@ import { Controller } from ".."
 export async function updateSettings(controller: Controller, request: UpdateSettingsRequest): Promise<Empty> {
 	try {
 		if (request.apiConfiguration) {
-			const convertedApiConfigurationFromProto = convertProtoToApiConfiguration(request.apiConfiguration)
+			const protoApiConfiguration = request.apiConfiguration
+
+			const convertedApiConfigurationFromProto = {
+				...protoApiConfiguration,
+				// Convert proto ApiProvider enums to native string types
+				planModeApiProvider: protoApiConfiguration.planModeApiProvider
+					? convertProtoToApiProvider(protoApiConfiguration.planModeApiProvider)
+					: undefined,
+				actModeApiProvider: protoApiConfiguration.actModeApiProvider
+					? convertProtoToApiProvider(protoApiConfiguration.actModeApiProvider)
+					: undefined,
+			}
 
 			controller.stateManager.setApiConfiguration(convertedApiConfigurationFromProto)
 
@@ -112,6 +124,26 @@ export async function updateSettings(controller: Controller, request: UpdateSett
 			}
 
 			controller.stateManager.setGlobalState("openaiReasoningEffort", reasoningEffort)
+		}
+
+		if (request.veniceEnableWebSearch !== undefined) {
+			// Convert proto enum to string type
+			let webSearch: VeniceWebSearch
+			switch (request.veniceEnableWebSearch) {
+				case ProtoVeniceWebSearch.AUTO:
+					webSearch = "auto"
+					break
+				case ProtoVeniceWebSearch.ON:
+					webSearch = "on"
+					break
+				case ProtoVeniceWebSearch.OFF:
+					webSearch = "off"
+					break
+				default:
+					throw new Error(`Invalid Venice web search value: ${request.veniceEnableWebSearch}`)
+			}
+
+			controller.stateManager.setGlobalState("veniceEnableWebSearch", webSearch)
 		}
 
 		if (request.preferredLanguage !== undefined) {

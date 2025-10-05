@@ -10,7 +10,7 @@ interface VeniceHandlerOptions extends CommonApiHandlerOptions {
 	veniceApiKey?: string
 	veniceModelId?: string
 	veniceModelInfo?: ModelInfo
-	veniceEnableWebSearch?: "auto" | "on" | "off"
+	veniceEnableWebSearch?: string
 	veniceIncludeSearchResultsInStream?: boolean
 	veniceIncludeVeniceSystemPrompt?: boolean
 	veniceStripThinkingResponse?: boolean
